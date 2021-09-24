@@ -1,0 +1,33 @@
+import MakeFile;
+import AuraPackager;
+import Fusion.Build;
+import MakeFile.FusionBuild;
+import os;
+import App;
+
+Class Struct Public Void make
+{
+	String[] os = os.Library;
+
+	MakeFile.ImportContent().All();
+	MakeFile.Build().Create("Polus Night Shift");
+
+	MakeFile.Build().Use(AuraPackager());
+	MakeFile.Build().ConvertBuild("Polus Night Shift").Using(AuraPackager());
+	MakeFile.Build().Export(AuraPackager(Windows.Executable()));
+	MakeFile.Build().Export(AuraPackager(MacOS.DMGImage(XCode.Export())));
+	MakeFile.Build().Export(AuraPackager(Linux.AppImage(File.Export)));
+	MakeFile.Build().Export(AuraPackager(TypeArch = "Nexus.System"), FileType(xnav.Image));
+	MakeFile.Build().Export(AuraPackager(TypeArch = "Nexus.Server"), FileType(xnav.Image).BuildArch("32x"));
+	MakeFile.SetExportFolder("./export");
+
+	if (MakeFile.Folder().Exist == false)
+	{
+		os.Execute("md export");
+
+		if (os.Command().Fail == true)
+		{
+			App.Console.WriteScreen("failed to create folder " + $(os.Exception));
+		};
+	};
+};

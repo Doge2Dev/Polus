@@ -1,0 +1,72 @@
+{
+	"Project" : {
+		"project.name" : "Polus Night Shift",
+		"project.package" : "com.dogedev.polus",
+		"project.version" : "1.0.0",
+		"project.dependencies" : {
+			"AuraEngine" : "8.8.7",
+			"BlasterFX" : "3.1",
+			"DirectGL" : "1.3",
+			"2DGL" : "0.2.1",
+			"Styler" : "2.4 stable",
+ 		},
+ 		"project.Sources" : "./source",
+		"project.Settings" : {
+			"window" : {
+				"window.width" : "1980",
+				"window.height" : "1080",
+				"window.border" : "null",
+				"window.title" : "Polus Night Shift",
+				"window.RenderOption" : {
+					"AdvCase" : {
+						"appType.Windows" : "DirectGL.DirectXRender",
+						"appType.Mac" : "2DGL.OpenNexus",
+						"appType.Linux" : "2DGL.DirectGLSupport",
+						"appType.NexusSystem" : "Direct.2DGLSupport",
+						"appType.NexusServer" : "2DGL.OpenGL2D"
+					}
+				}
+			}
+		},
+		"project.customField" : {
+			"AuraEngine.Dependencies" : {
+				"Linus" : "enable",
+				"DirectGL" : "enable",
+				"BlasterFX" : "enable",
+				"2DGL" : "enable",
+				"Styler" : "enable",
+				"FusionEngine" : "enable"
+			}
+		},
+		"project.customField1" : {
+			"2DGL.Components" : {
+				"2DGL" : "Installed",
+				"2DGL.Core" : "Installed",
+				"2DGL.Modules" : "Installed",
+				"2DGL.ComponentsList" : "Installed",
+				"2DGL.RenderEngine" : "Installed",
+				"2DGL.RNCore" : "deprecated",
+				"2DGL.RNCoreV2.Render" : "Installed",
+				"2DGL.DirectGlExtends" : "Installed",
+				"2DGL.PackageManager" : "Installed",
+				"2DGL.Interpreter" : "Installed",
+				"2DGL.DirectGLSupport" : "Installed"
+			}
+		},
+		"project.customField2" : {
+			"BlasterFX.Components" : {
+				"BlasterFX.SpriteBlitz" : "default",
+				"BlasterFX.XMLExp" : "default",
+				"BlasterFX.PackageManager" : "Blaster.Packages"
+			}
+		},
+		"project.customField3" : {
+			"Styler.Setting" : {
+				"Styler.Canvas" : "canvas.aura",
+				"Styler.Blitz" : "BlitzGL",
+				"Styler.External" : "Disable_lock"
+			}
+		}
+ 	}
+}
+

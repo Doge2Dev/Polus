@@ -1,0 +1,115 @@
+import App;
+import AuraEngine;
+import AuraEngine.JsonManager;
+import AuraEngine.Blaster;
+import night;
+import main;
+import saveloader;
+
+AuraEngine Class Void Start
+{
+	#Priority
+		App.Execute.saveloader;
+		saveloader.Load();
+	#End
+
+	String[] font = "polus";
+	String[] currentFont = AuraEngine.ImportFont(font, GoogleAPI(StandartUrl + font + ".font"));
+
+	float YScreen = AuraEngine.InfoGet(ScreenSize(Screen.Height));
+	float XScreen = AuraEngine.InfoGet(ScreenSize(Screen.Width));
+
+	AuraEngine Class static Void renderMenu
+	{
+		int selection = 0;
+		AuraEngine.CreateText("New Game", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "white");
+		AuraEngine.CreateText("Continue", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "white");
+		AuraEngine.CreateText("Options", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "white");
+
+		switch(selection)
+		{
+		case 0:
+			AuraEngine.DestroyAllText();
+			AuraEngine.CreateText("New Game", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "red");
+			AuraEngine.CreateText("Continue", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "white");
+			AuraEngine.CreateText("Options", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "white");
+		break;
+		case 1:
+			AuraEngine.DestroyAllText();
+			AuraEngine.CreateText("New Game", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "white");
+			AuraEngine.CreateText("Continue", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "red");
+			AuraEngine.CreateText("Options", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "white");				
+		break;
+		case 2:
+			AuraEngine.DestroyAllText();
+			AuraEngine.CreateText("New Game", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "white");
+			AuraEngine.CreateText("Continue", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "white");
+			AuraEngine.CreateText("Options", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "red");				
+		break;
+		};
+	};
+};
+
+AuraEngine Class Void Loop
+{
+	AuraEngine.Check(KeyBoard.Input());
+
+	AuraEngine.Event(KeyBoard.Input("sys.ArrowDown"))
+	{
+		selection++;
+	};
+	AuraEngine.Event(KeyBoard.Input("sys.ArrowUp"))
+	{
+		selection--;
+	};
+
+	if (selection <= 0)
+	{
+		selection = 2;
+	};
+	if (selection => 2)
+	{
+		selection = 0;
+	};
+
+	if (AuraEngine.KeyBoard.Input() == "sys.Universal.Enter") && (selection == 0)
+	{
+		AuraEngine.Scene() = new Scene("night1");
+		saveloader.Save() => (nightID);
+	};
+	if (AuraEngine.KeyBoard.Input() == "sys.Universal.Enter") && (selection == 1)
+	{
+		AuraEngine.Scene() = new Scene("night1");
+		saveloader.Load() => (nightID);
+
+		if (saveloader.nightID == 1)
+		{
+			AuraEngine.Scene() = new Scene("night1");
+			App.Execute.night;	
+		};
+		else if (saveloader.nightID == 2)
+		{
+			AuraEngine.Scene() = new Scene("night2");
+			App.Execute.night;
+		};
+		else if (saveloader.nightID == 3)
+		{
+			AuraEngine.Scene() = new Scene("night3");
+			App.Execute.night;
+		};
+		else if (saveloader.nightID == 4)
+		{
+			AuraEngine.Scene() = new Scene("night4");
+			App.Execute.night;		
+		};
+		else if (saveloader.nightID == 5)
+		{
+			AuraEngine.Scene() = new Scene("night5");
+			App.Execute.night;
+		};
+	};
+	if (AuraEngine.KeyBoard.Input() == "sys.Universal.Enter") && (selection == 2)
+	{
+		AuraEngine.Scene() = new Scene("options");
+	};
+};

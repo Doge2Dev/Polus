@@ -1,0 +1,34 @@
+import App;
+import AuraEngine;
+import AuraEngine.JsonManager;
+import AuraEngine.Blaster;
+
+AuraEngine Class Void gameplay(section)
+{
+	/*
+
+	NEED BE REWRITTEN =3
+	String[] styler = Styler.Init() -> Function();
+
+	String[] section = "section-name";
+
+	switch(section)
+	{
+		case "menu":
+			AuraEngine.CallStack(ScriptType(AuraEngine.MainScript("./source/menu.aura")));
+			styler.LoadStyleMap("./maps/menu.json");
+		break;
+		case "options":
+			styler.LoadStyleMap("./maps/options.json");
+		break;
+		case "night-list":
+			styler.LoadStyleMap("./maps/Nlist.json");
+		break;
+		case "loading":
+			styler.LoadStyleMap("./maps/load.json");
+		break;
+	};
+	*/
+};
+
+Package.Export;

@@ -1,0 +1,137 @@
+import App;
+import AuraEngine;
+import AuraEngine.Blaster;
+import AuraEngine.JsonManager;
+import ModelShape;
+import ModelShape.FunShape;
+import main;
+import saveloader;
+
+AuraEngine Class Void Start
+{
+	//some variables =3
+	float YScreen = AuraEngine.InfoGet(ScreenSize(Screen.Height));
+	float XScreen = AuraEngine.InfoGet(ScreenSize(Screen.Width));
+	int state = 0;
+	String[] text = AuraEngine.CreateText("Night" + saveloader.nightID);
+	float currentSize = text.GetTextSize(false);
+	float currentOpacity = text.GetRGB(AuraEngine.Text().ColorChannel(Alpha));
+	String[] cam = "you";
+
+	AuraEngine Function loadTextures()
+	{
+		//load textures
+		String[] map = ModelShape(ImportObject("./source/maps/map.mdf"), true);
+		String[] model_body_red = ModelShape(ImportObject("./source/chr/red.mdf"), true);
+		String[] model_body_blue = ModelShape(ImportObject("./source/chr/blue.mdf"), true);
+		String[] model_body_green = ModelShape(ImportObject("./source/chr/green.mdf"), true);
+		List String[] camUp_anim = AuraEngine.TextureBlitz("./source/img/cams/camUp_assets.png", true, "top-left") && AuraEngine.TextureBlitz().BlitMap("./source/img/cams/camUp_assets.xml", true);
+		List String[] camDown_anim = AuraEngine.TextureBlitz("./source/img/cams/camDown_assets.png", true, "top-left") && AuraEngine.TextureBlitz().BlitMap("./source/img/cams/camDown_assets.xml", true);
+		List String[] camBTN = AuraEngine.TextureBlitz("./source/img/cams/cam_btn_assets.png", true, "top-left") && AuraEngine.TextureBlitz().BlitMap("./source/img/cams/cam_btn_assets.xml", true);
+
+		AuraEngine.Event(Function.loadTextures() is loadTextures():Init())
+		{
+			camUp_anim.Blitz();
+			camDown_anim.Blitz();
+			camBTN.Blitz();
+		};
+	};
+
+	//night setup variables
+
+	int body_redAI = 0;
+	int body_blueAI = 0;
+	int body_greenAI = 0;
+
+	if (state == 1)
+	{
+		text.SetTextPos(XScreen / 2, YScreen / 2);
+		
+		while (state == 1)
+		{
+			text.SetTextSize(currentSize);
+			currentSize = currentSize - 0.2;
+			currentOpacity++;
+
+			if (currentSize == 0.10)
+			{
+				state = 2;
+			};
+			App.Timer.Sleep(0.3);
+		};
+	};
+	AuraEngine.CreateObject(AuraEngine.Active("ico_clock"), AuraEngine.Texture("source/img/ico_clock.png"), 1391, 601, 1, true);
+
+	if (state  = 2)
+	{
+		String[] camPanel = AuraEngine.UIElement().CreateElement("panel", 0, 0, XScreen, YScreen, 0, 0, 0, true, "top-left");
+		camPanel.
+		AuraEngine.DestroyObject("ico_clock");
+		switch (nightID)
+		{
+			case 1:
+				//night setup
+				body_redAI = 2;
+				body_blueAI = 0;
+				body_greenAI = 0;		
+			break;
+
+			default:
+				body_redAI = 0;
+				body_blueAI = 0;
+				body_greenAI = 0;
+		};
+
+		//night engine
+
+		AuraEngine.Event(AuraEngine.Scene() is Scene.Loaded())
+		{
+
+		};
+	};
+};
+
+AuraEngine Class Void Loop
+{
+	if (state  = 2)
+	{
+		AuraEngine.DestroyObject("ico_clock");
+		switch (nightID)
+		{
+			case 1:
+				//night setup
+				body_redAI = 2;
+				body_blueAI = 0;
+				body_greenAI = 0;		
+			break;
+
+			default:
+				body_redAI = 0;
+				body_blueAI = 0;
+				body_greenAI = 0;
+		};
+
+		//night engine
+
+		AuraEngine.Event(AuraEngine.Scene() is Scene.Loaded())
+		{
+			int camActive = 0;
+			//camera control
+
+
+			//GUI
+			camBTN.Draw().AuraEngine.ObjectUI("Button", AuraEngine.UIElement().CustomElement()) => var String[] camButton;
+			AuraEngine.UIElement().DrawElement("camButton", XScreen / 2, -YScreen, "top-left", false);
+			AuraEngine.UIElement().PropertieElement("Button").DetectClick("m", 0.3);
+
+			if (AuraEngine.UIElement(Element.Click()) == true && camActive == 0)
+			{
+				camActive = 1;
+			};
+			if (AuraEngine.UIElement(Element.Click()) == true && camActive == 1)
+			{
+				camActive = 0;
+			};
+		};
+	};	
+};
