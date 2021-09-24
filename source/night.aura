@@ -46,7 +46,8 @@ AuraEngine Class Void Start
 	if (state == 1)
 	{
 		text.SetTextPos(XScreen / 2, YScreen / 2);
-		
+		String[] camPanel = AuraEngine.UIElement().CreateElement("panel", 0, 0, XScreen, YScreen, 0, 0, 0, true, "top-left");
+
 		while (state == 1)
 		{
 			text.SetTextSize(currentSize);
@@ -61,34 +62,6 @@ AuraEngine Class Void Start
 		};
 	};
 	AuraEngine.CreateObject(AuraEngine.Active("ico_clock"), AuraEngine.Texture("source/img/ico_clock.png"), 1391, 601, 1, true);
-
-	if (state  = 2)
-	{
-		String[] camPanel = AuraEngine.UIElement().CreateElement("panel", 0, 0, XScreen, YScreen, 0, 0, 0, true, "top-left");
-		camPanel.
-		AuraEngine.DestroyObject("ico_clock");
-		switch (nightID)
-		{
-			case 1:
-				//night setup
-				body_redAI = 2;
-				body_blueAI = 0;
-				body_greenAI = 0;		
-			break;
-
-			default:
-				body_redAI = 0;
-				body_blueAI = 0;
-				body_greenAI = 0;
-		};
-
-		//night engine
-
-		AuraEngine.Event(AuraEngine.Scene() is Scene.Loaded())
-		{
-
-		};
-	};
 };
 
 AuraEngine Class Void Loop
@@ -98,13 +71,37 @@ AuraEngine Class Void Loop
 		AuraEngine.DestroyObject("ico_clock");
 		switch (nightID)
 		{
+			//Night setup (setup variable to define enemy AI 0-20)
 			case 1:
-				//night setup
 				body_redAI = 2;
 				body_blueAI = 0;
 				body_greenAI = 0;		
 			break;
-
+			case 2:
+				body_redAI = 7;
+				body_blueAI = 1;
+				body_greenAI = 0;		
+			break;
+			case 3:
+				body_redAI = 12;
+				body_blueAI = 5;
+				body_greenAI = 1;		
+			break;
+			case 4:
+				body_redAI = 16;
+				body_blueAI = 10;
+				body_greenAI = 4;		
+			break;
+			case 5:
+				body_redAI = 20;
+				body_blueAI = 12;
+				body_greenAI = 8;		
+			break;
+			case 6:
+				body_redAI = 20;
+				body_blueAI = 20;
+				body_greenAI = 10;		
+			break;
 			default:
 				body_redAI = 0;
 				body_blueAI = 0;
@@ -117,6 +114,9 @@ AuraEngine Class Void Loop
 		{
 			int camActive = 0;
 			//camera control
+			
+			AuraEngine.UIElement().DrawElement("square", 597, 890, "#000000");
+			String[] cam_text = AuraEngine.CreateText("");
 
 
 			//GUI
@@ -127,10 +127,26 @@ AuraEngine Class Void Loop
 			if (AuraEngine.UIElement(Element.Click()) == true && camActive == 0)
 			{
 				camActive = 1;
+				camPanel.UIElement().Tranparency(0);
+				camPanel.AuraEngine().AnimationControl("start", List["camUp_anim"]);
+
+				AuraEngine.Event(AuraEngine.AnimationControl() is Animation().End)
+				{
+					App.Console.WriteScreen("up anim end").Trace();
+					camPanel.UIElement().Tranparency(100);
+				};
 			};
 			if (AuraEngine.UIElement(Element.Click()) == true && camActive == 1)
 			{
 				camActive = 0;
+				camPanel.UIElement().Tranparency(0);
+				camPanel.AuraEngine().AnimationControl("start", List["camDown_anim"]);
+
+				AuraEngine.Event(AuraEngine.AnimationControl() is Animation().End)
+				{
+					App.Console.WriteScreen("down anim end").Trace();
+					camPanel.UIElement().Tranparency(100);
+				};
 			};
 		};
 	};	
