@@ -21,7 +21,7 @@ AuraEngine Class Static Structure saveloader
 			String[] save = hash + "\n" + nightID + "\n" + currentScene;
 
 			@override
-			if (!file().Created())
+			if (file().Created())
 			{
 				App.File.Write("save.dbsys", save);
 				App.File.Crypto(File("save.dbsys"), App.File.Crypto().UseHash(hash).Crypto(Hash32x));
@@ -35,6 +35,7 @@ AuraEngine Class Static Structure saveloader
 			iFile.LoadFile("save.dbsys");
 			App.File.Crypto(UncryptFile("save.dbsys", file.Content("hash").Hash32x().AssemblyLoad()));
 			nightID = iFile.Parse(File.Content("nightID").ParseContent());
+			AuraEngine.Scene().SetCurrentScene(iFile.Parse(File.Content("CurrentScene")));
 			AuraEngine.Scene().RestartScene();
 		};
 	};
