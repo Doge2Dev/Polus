@@ -43,6 +43,8 @@ AuraEngine Class Void Start
 	int body_blueAI = 0;
 	int body_greenAI = 0;
 
+	ModelShape.FunShape().Camera(DefaultCameraPos(ModelShape.UseModelGroup("map", "you")));
+
 	if (state == 1)
 	{
 		text.SetTextPos(XScreen / 2, YScreen / 2);
@@ -116,8 +118,21 @@ AuraEngine Class Void Loop
 			//camera control
 			
 			AuraEngine.UIElement().DrawElement("square", 597, 890, "#000000");
-			String[] cam_text = AuraEngine.CreateText("");
+			String[] cam_text = AuraEngine.CreateText("Cameras", "center-font", "pix");
+			String[] cam1_text = AuraEngine.CreateText("[CAM 1]", "center-font", "pix");
+			String[] cam2_text = AuraEngine.CreateText("[CAM 2]", "center-font", "pix");
+			String[] cam3_text = AuraEngine.CreateText("[CAM 3]", "center-font", "pix");
+			String[] cam4_text = AuraEngine.CreateText("[CAM 4]", "center-font", "pix");
+			String[] cam5_text = AuraEngine.CreateText("[CAM 5]", "center-font", "pix");
+			String[] cam6_text = AuraEngine.CreateText("[CAM 6]", "center-font", "pix");
 
+			cam_text.SetTextPos(XScreen / 2 - 473, YScreen / 2 + 390);
+			cam1_text.SetTextPos(XScreen / 2 - 477, YScreen / 2 + 393);
+			cam2_text.SetTextPos(XScreen / 2 - 477, YScreen / 2 + 396);
+			cam3_text.SetTextPos(XScreen / 2 - 477, YScreen / 2 + 399);
+			cam4_text.SetTextPos(XScreen / 2 - 477, YScreen / 2 + 403);
+			cam5_text.SetTextPos(XScreen / 2 - 477, YScreen / 2 + 406);
+			cam6_text.SetTextPos(XScreen / 2 - 477, YScreen / 2 + 409);
 
 			//GUI
 			camBTN.Draw().AuraEngine.ObjectUI("Button", AuraEngine.UIElement().CustomElement()) => var String[] camButton;
@@ -148,6 +163,225 @@ AuraEngine Class Void Loop
 					camPanel.UIElement().Tranparency(100);
 				};
 			};
+
+			//check input camera
+			if (AuraEngine.KeyBoard.Input() == "numpad.1" || AuraEngine.KeyBoard.Input() == "key.num1" && camActive == 1)
+			{
+				ModelShape().FunShape().Camera(SetCameraPos(ModelShape.UseModelGroup("map", "cam1")));
+				cam = "1"
+			};
+			if (AuraEngine.KeyBoard.Input() == "numpad.2" || AuraEngine.KeyBoard.Input() == "key.num2" && camActive == 1)
+			{
+				ModelShape().FunShape().Camera(SetCameraPos(ModelShape.UseModelGroup("map", "cam2")));
+				cam = "2"
+			};
+			if (AuraEngine.KeyBoard.Input() == "numpad.3" || AuraEngine.KeyBoard.Input() == "key.num3" && camActive == 1)
+			{
+				ModelShape().FunShape().Camera(SetCameraPos(ModelShape.UseModelGroup("map", "cam3")));
+				cam = "3"
+			};
+			if (AuraEngine.KeyBoard.Input() == "numpad.4" || AuraEngine.KeyBoard.Input() == "key.num4" && camActive == 1)
+			{
+				ModelShape().FunShape().Camera(SetCameraPos(ModelShape.UseModelGroup("map", "cam4")));
+				cam = "4"
+			};
+			if (AuraEngine.KeyBoard.Input() == "numpad.5" || AuraEngine.KeyBoard.Input() == "key.num5" && camActive == 1)
+			{
+				ModelShape().FunShape().Camera(SetCameraPos(ModelShape.UseModelGroup("map", "cam5")));
+				cam = "5"
+			};
+			if (AuraEngine.KeyBoard.Input() == "numpad.6" || AuraEngine.KeyBoard.Input() == "key.num6" && camActive == 1)
+			{
+				ModelShape().FunShape().Camera(SetCameraPos(ModelShape.UseModelGroup("map", "cam6")));
+				cam = "6"
+			};
+			if (camActive == 0)
+			{
+				ModelShape().FunShape().Camera(SetCameraPos(ModelShape.UseModelGroup("map", "you"));
+			};
+			if (camActive == 1)
+			{
+				ModelShape().FunShape().Camera(SetCameraPos(ModelShape.UseModelGroup("map", "cam" + cam));
+			};
 		};
-	};	
+	};
+
+	//door system
+	int doorState = 0;
+
+	if (AuraEngine.Mouse().Click(Mouse1.Click).Object(ModelShape.FunShape().ModelGroup("map", "door_button")) == true && doorState == 0)
+	{
+		doorState = 1;
+		ModelShape.ModelAnimation("map", "door_close");
+	};
+	if (AuraEngine.Mouse().Click(Mouse1.Click).Object(ModelShape.FunShape().ModelGroup("map", "door_button")) == true && doorState == 1)
+	{
+		doorState = 0;
+		ModelShape.ModelAnimation("map", "door_open");
+	};
+
+	//vent system
+	if (AuraEngine.Mouse().Click(Mouse1.Click).Object(ModelShape.FunShape().ModelGroup("map", "vent_button")) == true && ventDoorState == 0)
+	{
+		ventDoorState = 1;
+		ModelShape.ModelAnimation("map", "vent_close");
+	};
+	if (AuraEngine.Mouse().Click(Mouse1.Click).Object(ModelShape.FunShape().ModelGroup("map", "vent_button")) == true && ventDoorState == 1)
+	{
+		ventDoorState = 0;
+		ModelShape.ModelAnimation("map", "vent_open");
+	};
+
+	//enemy AI
+
+	//states =)
+	int redState = 0;
+	int blueState = 0;
+	int greenState = 0;
+
+	//red states cams
+
+	switch (redState)
+	{
+		case 1:
+			ModelShape.FunShape().ModelAnimation("red", "state_cam1");
+			ModelShape.FunShape().ModelPosition("red", ModelShape.UseModelGroup("map", "cam1", true));
+		break;
+		case 2:
+			ModelShape.FunShape().ModelAnimation("red", "state_cam2");
+			ModelShape.FunShape().ModelPosition("red", ModelShape.UseModelGroup("map", "cam2", true));
+		break;
+		case 3:
+			ModelShape.FunShape().ModelAnimation("red", "state_cam3");
+			ModelShape.FunShape().ModelPosition("red", ModelShape.UseModelGroup("map", "cam3", true));
+		break;
+		case 4:
+			ModelShape.FunShape().ModelAnimation("red", "state_cam4");
+			ModelShape.FunShape().ModelPosition("red", ModelShape.UseModelGroup("map", "cam4", true));
+		break;
+		case 5:
+			ModelShape.FunShape().ModelAnimation("red", "state_cam5");
+			ModelShape.FunShape().ModelPosition("red", ModelShape.UseModelGroup("map", "cam5", true));
+		break;
+		case 6:
+			ModelShape.FunShape().ModelAnimation("red", "state_cam6");
+			ModelShape.FunShape().ModelPosition("red", ModelShape.UseModelGroup("map", "cam6", true));
+		break;
+		case 6:
+			ModelShape.FunShape().ModelAnimation("red", "state_door");
+			ModelShape.FunShape().ModelPosition("red", ModelShape.UseModelGroup("map", "door", true));
+		break;
+		default:
+			ModelShape.FunShape().ModelAnimation("red", "idle");
+			ModelShape.FunShape().ModelPosition("red", ModelShape.UseModelGroup("map", 0, 0, 0, false));		
+	};
+
+	//blue states
+
+	switch (blueState)
+	{
+		case 1:
+			ModelShape.FunShape().ModelAnimation("blue", "state_cam1");
+			ModelShape.FunShape().ModelPosition("blue", ModelShape.UseModelGroup("map", "cam1", true));
+		break;
+		case 2:
+			ModelShape.FunShape().ModelAnimation("blue", "state_vent");
+			ModelShape.FunShape().ModelPosition("blue", ModelShape.UseModelGroup("map", "vent", true));
+		break;
+		case 3:
+			ModelShape.FunShape().ModelAnimation("blue", "state_room_vent");
+			ModelShape.FunShape().ModelPosition("blue", ModelShape.UseModelGroup("map", "room_vent", true));
+		break;
+		default:
+			ModelShape.FunShape().ModelAnimation("blue", "idle");
+			ModelShape.FunShape().ModelPosition("blue", ModelShape.UseModelGroup("map", 0, 0, 0, false));		
+	};
+
+	//green states
+	switch (greenState)
+	{
+		case 1:
+			ModelShape.FunShape().ModelAnimation("green", "state_cam1");
+			ModelShape.FunShape().ModelPosition("green", ModelShape.UseModelGroup("map", "cam1", true));
+		break;
+		case 2:
+			ModelShape.FunShape().ModelAnimation("green", "state_room_door");
+			ModelShape.FunShape().ModelPosition("green", ModelShape.UseModelGroup("map", "room_door", true));
+		break;
+		default:
+			ModelShape.FunShape().ModelAnimation("green", "idle");
+			ModelShape.FunShape().ModelPosition("green", ModelShape.UseModelGroup("map", 0, 0, 0, false));		
+	};
+
+	//flashlight
+
+	int flashActive;
+
+	if (AuraEngine.KeyBoard.Input() == "key.crtl")
+	{
+		ModelShape.Light().CreateLightSource(ModelShape.CoordinatesXYZ(ModelShape.UseNode("camera")), coordZ: 289,true, 0, 0, -180);
+		flashActive++;
+
+		if (flashActive > 10)
+		{
+			ModelShape.Light().DestroyLight();
+			flashActive = 0;
+		};
+	};
+
+	//Enemy reactions//
+
+
+	//Jumpscares//
+
+	//red
+	if (redState == 7 && doorState == 0)
+	{
+		wait = App.Math.Random(1,10);
+		App.Timer.sleep(wait);
+		redState = 8;
+	};
+	if (redState == 8)
+	{
+		ModelShape.FunShape().ModelAnimation("red", "jumpscare");
+
+		AuraEngine.Event(ModelShape().AnimationControl is Animation().End())
+		{
+			AuraEngine.Scene("game_over");
+		};
+	};
+
+	//blue
+	if (blueState == 4 && ventDoorState == 0)
+	{
+		wait = App.Math.Random(1,10);
+		App.Timer.sleep(wait);
+		blueState = 5;
+	};
+	if (blueState == 5)
+	{
+		ModelShape.FunShape().ModelAnimation("blue", "jumpscare");
+
+		AuraEngine.Event(ModelShape().AnimationControl is Animation().End())
+		{
+			AuraEngine.Scene("game_over");
+		};
+	};
+
+	//green
+	if (redState == 7 && doorState == 0)
+	{
+		wait = App.Math.Random(1,10);
+		App.Timer.sleep(wait);
+		redState = 8;
+	};
+	if (redState == 8)
+	{
+		ModelShape.FunShape().ModelAnimation("red", "jumpscare");
+
+		AuraEngine.Event(ModelShape().AnimationControl is Animation().End())
+		{
+			AuraEngine.Scene("game_over");
+		};
+	};
 };

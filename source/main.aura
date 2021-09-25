@@ -3,32 +3,40 @@ import AuraEngine;
 import AuraEngine.JsonManager;
 import AuraEngine.Blaster;
 
-AuraEngine Class Void gameplay(section)
+AuraEngine Class Void Start
 {
-	/*
+	//screen utils =3
+	String[] font = "polus";
+	String[] currentFont = AuraEngine.ImportFont(font, GoogleAPI(StandartUrl + font + ".font"));
+	float YScreen = AuraEngine.InfoGet(ScreenSize(Screen.Height));
+	float XScreen = AuraEngine.InfoGet(ScreenSize(Screen.Width));
+	int color = 0;
+	int sceneState = 0;
 
-	NEED BE REWRITTEN =3
-	String[] styler = Styler.Init() -> Function();
+	AuraEngine.Scene(CreateScene("game_over"));
 
-	String[] section = "section-name";
-
-	switch(section)
+	AuraEngine.Event(AuraEngine.Scene() is Scene().Loaded)
 	{
-		case "menu":
-			AuraEngine.CallStack(ScriptType(AuraEngine.MainScript("./source/menu.aura")));
-			styler.LoadStyleMap("./maps/menu.json");
-		break;
-		case "options":
-			styler.LoadStyleMap("./maps/options.json");
-		break;
-		case "night-list":
-			styler.LoadStyleMap("./maps/Nlist.json");
-		break;
-		case "loading":
-			styler.LoadStyleMap("./maps/load.json");
-		break;
+		AuraEngine.CreateText("Game Over", XScreen / 2, YScreen / 2, currentFont, 24, "white", "gameover_text");
+
+		while (sceneState == 1)
+		{
+			color++;
+			AuraEngine.Text("gameover_text", TextColor(color, 0, 0));
+			App.Timer.sleep(0.02);
+
+			if (color < 255)
+			{
+				sceneState = 1;
+			};
+		};
+		int i = 0;
+		while (sceneState == 1)
+		{
+			AuraEngine.Text("gameover_text", TextColor(i, i, i));
+			i++;
+		};
 	};
-	*/
 };
 
 Package.Export;
