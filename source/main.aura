@@ -1,7 +1,10 @@
 import App;
 import AuraEngine;
-import AuraEngine.JsonManager;
+import ModelShape;
 import AuraEngine.Blaster;
+import ModelShape.FunShape;
+import AuraEngine.JsonManager;
+
 
 AuraEngine Class Void Start
 {
@@ -15,7 +18,7 @@ AuraEngine Class Void Start
 
 	AuraEngine.Scene(CreateScene("game_over"));
 
-	AuraEngine.Event(AuraEngine.Scene() is Scene().Loaded)
+	AuraEngine.Event(AuraEngine.Scene() is Scene("game_over").Loaded)
 	{
 		AuraEngine.CreateText("Game Over", XScreen / 2, YScreen / 2, currentFont, 24, "white", "gameover_text");
 
@@ -37,6 +40,11 @@ AuraEngine Class Void Start
 			i++;
 		};
 	};
+};
+
+AuraEngine Class Void Loop
+{
+	AuraEngine.Event();
 };
 
 Package.Export;

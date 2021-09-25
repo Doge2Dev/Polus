@@ -7,6 +7,8 @@ import ModelShape.FunShape;
 import main;
 import saveloader;
 
+
+//night manager and other stuff
 AuraEngine Class Void Start
 {
 	//some variables =3
@@ -331,6 +333,44 @@ AuraEngine Class Void Loop
 
 	//Enemy reactions//
 
+	AuraEngine Class Void red
+	{
+		body_redAI = body_redAI => -(body_redAI);
+		App.Timer.sleep(body_redAI);
+		redState++;
+
+		if (redState == 7 && doorState == 1)
+		{
+			int randTime = App.Math.Random(1, 10);
+			redState = App.Math.Random(2, 4);
+		};
+	};
+
+	AuraEngine Class Void blue
+	{
+		body_blueAI = body_blueAI => -(body_blueAI);
+		App.Timer.sleep(body_blueAI);
+		blueState++;
+
+		if (blueState == 7 && ventDoorState == 1)
+		{
+			int randTime = App.Math.Random(1, 10);
+			blueState = 3
+		};		
+	};
+
+	AuraEngine Class Void green
+	{
+		body_greenAI = body_greenAI => -(body_greenAI);
+		App.Timer.sleep(body_greenAI);
+		greenState++;
+
+		if (greenState == 2 && doorState == 1)
+		{
+			int randTime = App.Math.Random(1, 10);
+			redState = 1
+		};		
+	};
 
 	//Jumpscares//
 
@@ -369,15 +409,15 @@ AuraEngine Class Void Loop
 	};
 
 	//green
-	if (redState == 7 && doorState == 0)
+	if (greenState == 3 && doorState == 0)
 	{
 		wait = App.Math.Random(1,10);
 		App.Timer.sleep(wait);
-		redState = 8;
+		greenState = 4;
 	};
-	if (redState == 8)
+	if (redState == 4)
 	{
-		ModelShape.FunShape().ModelAnimation("red", "jumpscare");
+		ModelShape.FunShape().ModelAnimation("green", "jumpscare");
 
 		AuraEngine.Event(ModelShape().AnimationControl is Animation().End())
 		{

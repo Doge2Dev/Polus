@@ -1,7 +1,7 @@
 {
 	"Project" : {
 		"project.name" : "Polus Night Shift",
-		"project.package" : "com.dogedev.polus",
+		"project.package" : "ar.dogedev.polus",.
 		"project.version" : "1.0.0",
 		"project.dependencies" : {
 			"AuraEngine" : "8.8.7",
