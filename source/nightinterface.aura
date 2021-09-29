@@ -1,0 +1,42 @@
+import App;
+import AuraEngine;
+import AuraEngine.Blaster;
+import AuraEngine.JsonManager;
+import ModelShape;
+import ModelShape.FunShape;
+import main;
+import saveloader;
+import modnight;
+import night;
+
+AuraEngine Class Void Start
+{
+	float YScreen = AuraEngine.InfoGet(ScreenSize(Screen.Height));
+	float XScreen = AuraEngine.InfoGet(ScreenSize(Screen.Width));
+	int layer = AuraEngine.UIElement().Layer();
+
+	AuraEngine Class Public Void interface
+	{
+		//draw the interface
+
+		AuraEngine.CreateText("Custom Night", XScreen / 2, -YScreen, "pix", "white", 23);
+		AuraEngine.UIElement().CreateElemnt("button", 128, 64, "start", UIElement("square").LeftCornerPos(x, y, "bottom"));
+		AuraEngine.UIElement().DrawElement("square", XScreen / 2, YScreen / 2, "top-left", false, 640, 480);
+		layer.ChangeLayer(2);
+
+		//drawing the var boxes
+
+		String[] redAI = AuraEngine.UIElement().CreateElemnt(UIElement.EditBox("number", 1, 20));
+		String[] blueAI = AuraEngine.UIElement().CreateElemnt(UIElement.EditBox("number", 1, 20));
+		String[] greenAI = AuraEngine.UIElement().CreateElemnt(UIElement.EditBox("number", 1, 20));
+
+		AuraEngine.Event(AuraEngine.UIElement is UIElement("Button").Clicked)
+		{
+			night.var(night.body_redAI().SetValue(redAI));
+			night.var(night.body_blueAI().SetValue(blueAI));
+			night.var(night.body_greenAI().SetValue(greenAI));
+			AuraEngine.Scene("night");
+			App.Callstack().night;
+		};
+	};
+};

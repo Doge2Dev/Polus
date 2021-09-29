@@ -1,3 +1,8 @@
+import AuraRuntime;
+import AuraRuntime.RuntimeKit;
+import AuraRuntime.RuntimeKit.PlyBase;
+import AuraEngine.JsonManager;
+import App;
 import AuraEngine;
 import AuraEngine.Core;
 import AuraEngine.Module;
@@ -16,7 +21,7 @@ Function Define Init() //current vanilla aura function lmao =3
 	IUse.AuraLibManager(AuraEngine.Module) = AuraModule;
 	IUse.AuraLibManager(AuraEngine.Dependencies) = AuraDependencies;
 	IUse.AuraLibManager(ModelShape) = ModelShape;
-	IUse.AuraLibManager(ModelShape.FunShape) = MSFunShape;
+	IUse.AuraLibManager(ModelShape.FunShape) = ModelShape.FunShape;
 };
 
 //Settings here
@@ -27,7 +32,7 @@ AuraEngine.Project(CurrentProject(Setup))
 
 AuraCore.Settings(Current)
 {
-	AuraDependencies.Using("2DGL") && AuraDependencies.LoadDepSettings("./settings.json");
+	AuraDependencies.Using("2DGL");
 	AuraEngine.Effects() = Using(IUse.AuraLibManager("BlasterFX") = Blasterfx());
 	AuraEngine.Blasterfx().Antialiasing(true);
 };
@@ -63,3 +68,20 @@ AuraEngine.RenderOptions()
 //lets initialize baby =3
 
 AuraEngine.Init();
+
+//starts with Aura Runtime kit
+
+AuraEngine.Init() = AuraRuntime().EventInterpolate(AuraEngine.Init() is state = "init");
+
+AuraRuntime().onEvent(state = Runtime.init)
+{
+	AuraRuntime.RuntimeKit(InitScripts());
+	for (AuraRuntime.RuntimeKit().ScriptInit() .. JsonManager.JSONParser("customField4", SubArray("AuraEngine.Init")));
+	{
+		AuraRuntime.RuntimeKit.PlyBase(PlyBase.Clear(*));
+		AuraRuntime.RuntimeKit.PlyBase(PlyBase.BlitzOptimizate());
+		AuraRuntime.RuntimeKit(RuntimeKit.Reload(*));
+		AuraRuntime.RuntimeKit(MemAdrr.Overwrite(), AuraRuntime.ScriptsSize());
+	};
+	AuraRuntime.Run();
+};

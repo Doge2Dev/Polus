@@ -1,0 +1,25 @@
+import App;
+import App.Screen;
+import Package;
+import AuraEngine;
+import AuraEngine.Blaster;
+import AuraEngine.JsonManager;
+import ModelShape;
+import ModelShape.FunShape;
+import main;
+import saveloader;
+import nightinterface;
+
+AuraEngine Class Void Start
+{
+	AuraEngine.CreateScene("modnight");
+	AuraEngine.Scene("modnight");
+	nightinterface.interface();
+
+	App.Event().LibraryEvent(AuraEngine.Exception())
+	{
+		App.Screen.WriteText($'AuraEngine.Exception()') && App.Console.WriteScreen($'AuraEngine.Exception()').Trace();
+	};
+};
+
+Package.Export;

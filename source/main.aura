@@ -1,9 +1,12 @@
 import App;
+import menu;
+import Package;
 import AuraEngine;
 import ModelShape;
 import AuraEngine.Blaster;
 import ModelShape.FunShape;
 import AuraEngine.JsonManager;
+
 
 
 AuraEngine Class Void Start
@@ -15,36 +18,52 @@ AuraEngine Class Void Start
 	float XScreen = AuraEngine.InfoGet(ScreenSize(Screen.Width));
 	int color = 0;
 	int sceneState = 0;
+	int fxcolor = 34;
+	String[] bg = AuraEngine.Background(Static.Color(0, 0, 0));
 
+
+	//script used to create game over scene
 	AuraEngine.Scene(CreateScene("game_over"));
 
 	AuraEngine.Event(AuraEngine.Scene() is Scene("game_over").Loaded)
 	{
+		bg.changeBackground();
+		ModelShape.DestroyAllModels();
+		ModelShape.FunShape.DestroyAllModels();
 		AuraEngine.CreateText("Game Over", XScreen / 2, YScreen / 2, currentFont, 24, "white", "gameover_text");
 
 		while (sceneState == 1)
 		{
 			color++;
 			AuraEngine.Text("gameover_text", TextColor(color, 0, 0));
-			App.Timer.sleep(0.02);
-
+			BlasterFX.CreateFX(): AuraEngine.Scene().Background(BlasterFX.FXCommunity(BlasterGet("wall_blood_fx.json"), true, 1));
+			BlasterFX.FXColor(CurrentExecutedFX(fxcolor, 0, 0));
 			if (color < 255)
 			{
 				sceneState = 1;
 			};
+			fxcolor++;
+			App.Timer.sleep(0.02);
 		};
 		int i = 0;
 		while (sceneState == 1)
 		{
 			AuraEngine.Text("gameover_text", TextColor(i, i, i));
 			i++;
+
+			if (i > 255)
+			{
+				sceneState = 2;
+				AuraEngine.Scene() = new Scene("menu");
+			};
 		};
 	};
 };
 
 AuraEngine Class Void Loop
-{
-	AuraEngine.Event();
+{	
+	AuraEngine.Scene(CreateScene("menu"));
+	App.Execute.menu;
 };
 
 Package.Export;

@@ -1,6 +1,7 @@
 import App;
 import AuraEngine;
 import AuraEngine.Blaster;
+import Package;
 import AuraEngine.JsonManager;
 import ModelShape;
 import ModelShape.FunShape;
@@ -41,10 +42,11 @@ AuraEngine Class Void Start
 
 	//night setup variables
 
-	int body_redAI = 0;
-	int body_blueAI = 0;
-	int body_greenAI = 0;
+	Parse toGlobal {int body_redAI = 0};
+	Parse toGlobal {int body_blueAI = 0};
+	Parse toGlobal {int body_greenAI = 0};
 
+	//map
 	ModelShape.FunShape().Camera(DefaultCameraPos(ModelShape.UseModelGroup("map", "you")));
 
 	if (state == 1)
@@ -139,7 +141,7 @@ AuraEngine Class Void Loop
 			//GUI
 			camBTN.Draw().AuraEngine.ObjectUI("Button", AuraEngine.UIElement().CustomElement()) => var String[] camButton;
 			AuraEngine.UIElement().DrawElement("camButton", XScreen / 2, -YScreen, "top-left", false);
-			AuraEngine.UIElement().PropertieElement("Button").DetectClick("m", 0.3);
+			AuraEngine.UIElement().PropertieElement("Button").DetectClick("mouse1", 0.3);
 
 			if (AuraEngine.UIElement(Element.Click()) == true && camActive == 0)
 			{
@@ -151,6 +153,7 @@ AuraEngine Class Void Loop
 				{
 					App.Console.WriteScreen("up anim end").Trace();
 					camPanel.UIElement().Tranparency(100);
+					AuraEngine.UIElement().ElementTransparency("square", 100);
 				};
 			};
 			if (AuraEngine.UIElement(Element.Click()) == true && camActive == 1)
@@ -163,6 +166,7 @@ AuraEngine Class Void Loop
 				{
 					App.Console.WriteScreen("down anim end").Trace();
 					camPanel.UIElement().Tranparency(100);
+					AuraEngine.UIElement().ElementTransparency("square", 0);
 				};
 			};
 
@@ -425,3 +429,5 @@ AuraEngine Class Void Loop
 		};
 	};
 };
+
+Package.Export;

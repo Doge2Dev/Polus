@@ -1,5 +1,6 @@
 import App;
 import AuraEngine;
+import Package;
 import AuraEngine.JsonManager;
 import AuraEngine.Blaster;
 import night;
@@ -8,11 +9,13 @@ import saveloader;
 
 AuraEngine Class Void Start
 {
-	#Priority
+	:Priority
 		App.Execute.saveloader;
 		saveloader.Load();
-	#End
+	:End
 
+
+	int fxcolor = 34;
 	String[] font = "polus";
 	String[] currentFont = AuraEngine.ImportFont(font, GoogleAPI(StandartUrl + font + ".font"));
 
@@ -21,6 +24,11 @@ AuraEngine Class Void Start
 
 	AuraEngine Class static Void renderMenu
 	{
+		BlasterFX.CreateFX(): AuraEngine.Scene().Background(BlasterFX.FXCommunity(BlasterGet("wall_blood_fx.json"), true, 1));
+		BlasterFX.FXColor(CurrentExecutedFX(fxcolor, 0, 0));
+
+		blasterfx_changecolor();
+
 		int selection = 0;
 		AuraEngine.CreateText("New Game", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "white");
 		AuraEngine.CreateText("Continue", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "white");
@@ -46,6 +54,27 @@ AuraEngine Class Void Start
 			AuraEngine.CreateText("Continue", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "white");
 			AuraEngine.CreateText("Options", XScreen / 2, YScreen / 2 + 45, currentFont, 24, "red");				
 		break;
+		};
+
+		@Override Struct Function blasterfx_changecolor()
+		{
+			int i = 0;
+			int count_state = 0
+
+			if (count_state == 0 && i >= 78)
+			{
+				i--;
+				count_state = 1;
+				BlasterFX.FXColor(CurrentExecutedFX(i, 0, 0));
+			};
+
+			if (count_state == 0 && i <= 34)
+			{
+				i++;
+				count_state = 0;
+				BlasterFX.FXColor(CurrentExecutedFX(i, 0, 0));
+			};
+
 		};
 	};
 };
@@ -74,37 +103,37 @@ AuraEngine Class Void Loop
 
 	if (AuraEngine.KeyBoard.Input() == "sys.Universal.Enter") && (selection == 0)
 	{
-		AuraEngine.Scene() = new Scene("night1");
+		AuraEngine.Scene() = new Scene("nightEngine");
 		saveloader.Save() => (nightID);
 	};
 	if (AuraEngine.KeyBoard.Input() == "sys.Universal.Enter") && (selection == 1)
 	{
-		AuraEngine.Scene() = new Scene("night1");
+		AuraEngine.Scene() = new Scene("nightEngine");
 		saveloader.Load() => (nightID);
 
 		if (saveloader.nightID == 1)
 		{
-			AuraEngine.Scene() = new Scene("night1");
+			AuraEngine.Scene() = new Scene("nightEngine");
 			App.Execute.night;	
 		};
 		else if (saveloader.nightID == 2)
 		{
-			AuraEngine.Scene() = new Scene("night2");
+			AuraEngine.Scene() = new Scene("nightEngine");
 			App.Execute.night;
 		};
 		else if (saveloader.nightID == 3)
 		{
-			AuraEngine.Scene() = new Scene("night3");
+			AuraEngine.Scene() = new Scene("nightEngine");
 			App.Execute.night;
 		};
 		else if (saveloader.nightID == 4)
 		{
-			AuraEngine.Scene() = new Scene("night4");
+			AuraEngine.Scene() = new Scene("nightEngine");
 			App.Execute.night;		
 		};
 		else if (saveloader.nightID == 5)
 		{
-			AuraEngine.Scene() = new Scene("night5");
+			AuraEngine.Scene() = new Scene("nightEngine");
 			App.Execute.night;
 		};
 	};
@@ -113,3 +142,5 @@ AuraEngine Class Void Loop
 		AuraEngine.Scene() = new Scene("options");
 	};
 };
+
+Package.Export;
