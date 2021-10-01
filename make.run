@@ -1,0 +1,8 @@
+//Aura TerminalLogger Script v1.0
+[runtime]
+runtime=aura -m "AuraRuntime" -run -index -cpath --standard
+[make]
+make=aura -instance -m "AuraRuntime" -run-script "make.aura"
+[event:"make"]
+exec=aura -m "AuraEngine" -build -createRuntime -debug -path "make.aura"
+exec2=aura -m "AuraEngine" -debug

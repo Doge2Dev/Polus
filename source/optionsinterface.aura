@@ -1,0 +1,10 @@
+import app;
+import AuraEngine;
+import AuraEngine.Jsonmanager;
+
+AuraEngine Class Void Start
+{
+	//interface
+	AuraEngine.CreateText();
+	AuraEngine.UIElement().CreateElemnt("Button")
+};

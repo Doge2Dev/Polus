@@ -1,7 +1,5 @@
 import MakeFile;
 import AuraPackager;
-import Fusion.Build;
-import MakeFile.FusionBuild;
 import os;
 import App;
 
@@ -21,6 +19,9 @@ Class Struct Public Void make
 	MakeFile.Build().Export(AuraPackager(TypeArch = "Nexus.Server"), FileType(xnav.Image).BuildArch("32x"));
 	MakeFile.SetExportFolder("./export");
 
+
+:Priority(
+
 	if (MakeFile.Folder().Exist == false)
 	{
 		os.Execute("md export");
@@ -30,4 +31,7 @@ Class Struct Public Void make
 			App.Console.WriteScreen("failed to create folder " + $(os.Exception));
 		};
 	};
+)
+:End
+
 };

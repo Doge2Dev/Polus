@@ -372,7 +372,7 @@ AuraEngine Class Void Loop
 		if (greenState == 2 && doorState == 1)
 		{
 			int randTime = App.Math.Random(1, 10);
-			redState = 1
+			greenState = 1
 		};		
 	};
 

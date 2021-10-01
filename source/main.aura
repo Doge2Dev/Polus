@@ -27,7 +27,7 @@ AuraEngine Class Void Start
 
 	AuraEngine.Event(AuraEngine.Scene() is Scene("game_over").Loaded)
 	{
-		bg.changeBackground();
+		bg.ChangeBackground();
 		ModelShape.DestroyAllModels();
 		ModelShape.FunShape.DestroyAllModels();
 		AuraEngine.CreateText("Game Over", XScreen / 2, YScreen / 2, currentFont, 24, "white", "gameover_text");
@@ -58,11 +58,15 @@ AuraEngine Class Void Start
 			};
 		};
 	};
+	AuraEngine.Scene(CreateScene("menu"));
+	AuraEngine.Scene(CreateScene("modnight"));
+	AuraEngine.Scene(CreateScene("options"));
+	AuraEngine.Scene(CreateScene("extras"));	
 };
 
 AuraEngine Class Void Loop
 {	
-	AuraEngine.Scene(CreateScene("menu"));
+	AuraEngine.Scene = new Scene("menu");
 	App.Execute.menu;
 };
 

@@ -14,11 +14,13 @@ AuraEngine Class Void Start
 	float YScreen = AuraEngine.InfoGet(ScreenSize(Screen.Height));
 	float XScreen = AuraEngine.InfoGet(ScreenSize(Screen.Width));
 	int layer = AuraEngine.UIElement().Layer();
+	String[] bg = AuraEngine.Background(Static.Color(0, 0, 0));
 
 	AuraEngine Class Public Void interface
 	{
 		//draw the interface
 
+		bg.ChangeBackground();
 		AuraEngine.CreateText("Custom Night", XScreen / 2, -YScreen, "pix", "white", 23);
 		AuraEngine.UIElement().CreateElemnt("button", 128, 64, "start", UIElement("square").LeftCornerPos(x, y, "bottom"));
 		AuraEngine.UIElement().DrawElement("square", XScreen / 2, YScreen / 2, "top-left", false, 640, 480);
@@ -26,9 +28,9 @@ AuraEngine Class Void Start
 
 		//drawing the var boxes
 
-		String[] redAI = AuraEngine.UIElement().CreateElemnt(UIElement.EditBox("number", 1, 20));
-		String[] blueAI = AuraEngine.UIElement().CreateElemnt(UIElement.EditBox("number", 1, 20));
-		String[] greenAI = AuraEngine.UIElement().CreateElemnt(UIElement.EditBox("number", 1, 20));
+		String[] redAI = AuraEngine.UIElement().CreateElemnt(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 32,  128, 32);
+		String[] blueAI = AuraEngine.UIElement().CreateElemnt(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 64,  128, 32);
+		String[] greenAI = AuraEngine.UIElement().CreateElemnt(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 96,  128, 32);
 
 		AuraEngine.Event(AuraEngine.UIElement is UIElement("Button").Clicked)
 		{
@@ -36,7 +38,7 @@ AuraEngine Class Void Start
 			night.var(night.body_blueAI().SetValue(blueAI));
 			night.var(night.body_greenAI().SetValue(greenAI));
 			AuraEngine.Scene("night");
-			App.Callstack().night;
+			App.Callstack.night;
 		};
 	};
 };

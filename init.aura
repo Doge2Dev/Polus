@@ -11,7 +11,6 @@ import AuraLibManager;
 import AuraLibManager.Community;
 import ModelShape;
 import ModelShape.FunShape;
-import App;
 
 
 Function Define Init() //current vanilla aura function lmao =3
@@ -85,3 +84,6 @@ AuraRuntime().onEvent(state = Runtime.init)
 	};
 	AuraRuntime.Run();
 };
+
+AuraRuntime().Authorization("invoker");
+AuraRuntime.EnableLogs();
