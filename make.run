@@ -1,4 +1,5 @@
 //Aura TerminalLogger Script v1.0
+// binds for aura, just tyé them in cmd to run
 [runtime]
 runtime=aura -m "AuraRuntime" -run -index -cpath --standard
 [make]

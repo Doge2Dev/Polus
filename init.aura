@@ -86,4 +86,4 @@ AuraRuntime().onEvent(state = Runtime.init)
 };
 
 AuraRuntime().Authorization("invoker");
-AuraRuntime.EnableLogs();
+AuraRuntime().EnableLogs();
