@@ -1,6 +1,7 @@
 import AuraRuntime;
 import AuraRuntime.RuntimeKit;
 import AuraRuntime.RuntimeKit.PlyBase;
+import AuraRuntime.RuntimeKit.PlyBase.Jinx;
 import AuraEngine.JsonManager;
 import App;
 import AuraEngine;
@@ -74,16 +75,49 @@ AuraEngine.Init() = AuraRuntime().EventInterpolate(AuraEngine.Init() is state = 
 
 AuraRuntime().onEvent(state = Runtime.init)
 {
+	//init scripts first
 	AuraRuntime.RuntimeKit(InitScripts());
-	for (AuraRuntime.RuntimeKit().ScriptInit() .. JsonManager.JSONParser("customField4", SubArray("AuraEngine.Init")));
+	for (AuraRuntime.RuntimeKit().ScriptInit() .. JsonManager.JSONParser("customField4", SubArray("AuraEngine.Init"), SubArray("Script"))
 	{
 		AuraRuntime.RuntimeKit.PlyBase(PlyBase.Clear(*));
 		AuraRuntime.RuntimeKit.PlyBase(PlyBase.BlitzOptimizate());
 		AuraRuntime.RuntimeKit(RuntimeKit.Reload(*));
-		AuraRuntime.RuntimeKit(MemAdrr.Overwrite(), AuraRuntime.ScriptsSize());
+		AuraRuntime.RuntimeKit(MemAdrr.Overwrite(*, RuntimeKit.plyBase()), AuraRuntime.ScriptsSize());
+
+		:Priority
+		if (JsonManager.JSONParser("customField4", SubArray("AuraEngine.Init"), SubArray("Function").stringContains() == "--")
+		{
+			AuraRuntime.RuntimeKit.PlyBase(PlyBase.Clear(*));
+			AuraRuntime.RuntimeKit.PlyBase(PlyBase.BlitzOptimizate());
+			AuraRuntime.RuntimeKit(RuntimeKit.Reload(*));
+			AuraRuntime.RuntimeKit(MemAdrr.Overwrite(*, RuntimeKit.plyBase()), AuraRuntime.ScriptsSize());
+		};
+		:End
+	};
+
+	//run functions
+	AuraRuntime.RuntimeKit(RuntimeFunctions(*));
+	for (AuraRuntime.RuntimeKit().Function() .. JsonManager.JSONParser("customField4", SubArray("AuraEngine.Init"), SubArray("Function"))
+	{
+		App.Console.Clear();
+		AuraRuntime.RuntimeKit().Execute(*);
+		AuraRuntime.RuntimeKit().PlyBase(Jinx().RuntimeFunctions(RunScriptFunctions("customField4", SubArray("AuraEngine.Init"), SubArray("Function"))));
+		AuraRuntime.Run(Jinx().RunFunctions);
+		App.Console.WriteScreen("Running function " + AuraRuntime.RuntimeKit.PlyBase.Jinx(CurrentFunction().RunningFunction())).Trace();
+
+		:Priority
+		if (JsonManager.JSONParser("customField4", SubArray("AuraEngine.Init"), SubArray("Function").stringContains() == "--")
+		{
+			App.Console.Clear();
+			AuraRuntime.RuntimeKit().Execute(*);
+			AuraRuntime.RuntimeKit().PlyBase(Jinx().RuntimeFunctions(RunScriptFunctions("customField4", SubArray("AuraEngine.Init"), SubArray("Function"))));
+			AuraRuntime.Run(Jinx().RunFunctions);
+			App.Console.WriteScreen("Running function " + AuraRuntime.RuntimeKit.PlyBase.Jinx(CurrentFunction().RunningFunction())).Trace();
+		};
+		:End
 	};
 	AuraRuntime.Run();
 };
 
 AuraRuntime().Authorization("invoker");
-AuraRuntime().EnableLogs();
+AuraRuntime().EnableLogs("./logs");

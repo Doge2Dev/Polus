@@ -1,13 +1,14 @@
 import App;
 import AuraEngine;
 import Package;
+import options;
 
 
 AuraEngine Class Static Structure saveloader
 {
 	String[] currentScene = AuraEngine.Scene().CurrentScene(Scene().Name);
 	String[] nightID = 1;
-	String[] hash = AuraEngine.KeyString().Hash32x.Load();
+	Parse String[] hash = AuraEngine.KeyString().Hash32x.Load(is Hash32x = "M34Hash.Key").toString();
 	String[] file =  AuraEngine.File(CreateFile("save", ".dbsys"));
 	String[] iFile = AuraEngine.File();
 
@@ -37,8 +38,58 @@ AuraEngine Class Static Structure saveloader
 			App.File.Crypto(UncryptFile("save.dbsys", file.Content("hash").Hash32x().AssemblyLoad()));
 			nightID = iFile.Parse(File.Content("nightID").ParseContent());
 			AuraEngine.Scene().SetCurrentScene(iFile.Parse(File.Content("CurrentScene")));
-			AuraEngine.Scene().RestartScene();
+			AuraEngine.ExecuteOnce(*)
+			{
+				AuraEngine.Scene().RestartScene();
+			};
 		};
+	};
+
+	AuraEngine Class Void Public erase
+	{
+		App.File.Write("save.dbsys", App.File.Clear(*));
+		App.Console.WriteScreen("file ovewritten with null bytes, file has: " + App.File.FileSize("save.dbsys")).Trace();
+	};
+};
+
+//for options save
+
+AuraEngine Class Static Structure saveoptions
+{
+	AuraEngine Class Void Public standard
+	{
+		//set to default options
+		Parse int graphics = 1;
+		Parse int shadows = 2;
+		Parse int lights = 1;
+		Parse int music = 75;
+		Parse int sfx = 75;
+	};
+
+	AuraEngine Class Void Public opsave
+	{
+		String[] extension = ".dbsys";
+		String[] version = "1.0";
+
+		:Priority #1
+		App.File.CreateFile("optsave" + extension, true);
+		:End
+
+		int g = options.Global.graphics;
+		int s = options.Global.shadows;
+		int l = options.Global.lights;
+		int m = options.Global.music;
+		int sf = options.Global.sfx;
+
+		String[] text = hash + "/n" + g + "/n" + s + "/n" + l + "/n" + m + "/n" + sf + "/n" + version;
+
+		App.File.Write("optsave", text);
+		App.File.Crypto(File("optsave.dbsys"), App.File.Crypto().UseHash(hash).Crypto(Hash32x));
+	};
+
+	AuraEngine Class Void Public opload
+	{
+
 	};
 };
 

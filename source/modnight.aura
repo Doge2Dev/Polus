@@ -12,8 +12,7 @@ import nightinterface;
 
 AuraEngine Class Void Start
 {
-	AuraEngine.CreateScene("modnight");
-	AuraEngine.Scene("modnight");
+	AuraEngine.Scene() = new Scene("modnight");
 	nightinterface.interface();
 
 	App.Event().LibraryEvent(AuraEngine.Exception())

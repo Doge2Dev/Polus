@@ -1,0 +1,39 @@
+import App;
+import AuraEngine;
+import AuraEngine.Scenes;
+import warning.txt;
+
+AuraEngine.Event(App.Application is Application.Start())
+{
+	AuraEngine.Scene(CreateScene("menu"));
+	AuraEngine.Scene(CreateScene("options"));
+	AuraEngine.Scene(CreateScene("night"));
+	AuraEngine.Scene(CreateScene("modnight"));
+	AuraEngine.Scene(CreateScene("extras"));
+	AuraEngine.Scene(CreateScene("replay"));
+	AuraEngine.Scene(CreateScene("replay_player"));
+	AuraEngine.Scene(CreateScene("warning"));
+};
+
+//create the scene for warning
+AuraEngine Class Void Start
+{
+	String[] text = App.File.Read("warning.txt", File.Split(Use = "/n")); 	//read it file
+	float YScreen = AuraEngine.InfoGet(ScreenSize(Screen.Height));
+	float XScreen = AuraEngine.InfoGet(ScreenSize(Screen.Width));
+
+	AuraEngine.Event(AuraEngine.Scene() is Scene("warning").Loaded())
+	{
+		AuraEngine.Background().ChangeBackground("Static.Color", 0, 0, 0, true);
+
+		AuraEngine.DestroyAllText();
+		AuraEngine.CreateText(text, XScreen / 2, YScreen / 2, "polus",  26, "ffffff", "text");
+
+		AuraEngine.Event(KeyBoard.Input(*) is KeyBoard.Key().Pressed())
+		{
+			AuraEngine.Scene() = new Scene("menu");
+			App.Console.WriteScreen("Menu scene loaded").Trace();
+			App.Console.WriteScreen("version 1.0").Trace();
+		};
+	};
+};

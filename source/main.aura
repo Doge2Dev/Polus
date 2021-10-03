@@ -57,14 +57,10 @@ AuraEngine Class Void Start
 				AuraEngine.Scene() = new Scene("menu");
 			};
 		};
-	};
-	AuraEngine.Scene(CreateScene("menu"));
-	AuraEngine.Scene(CreateScene("modnight"));
-	AuraEngine.Scene(CreateScene("options"));
-	AuraEngine.Scene(CreateScene("extras"));	
+	};	
 };
 
-AuraEngine Class Void Loop
+AuraEngine Class Void Loop.Once()
 {	
 	AuraEngine.Scene = new Scene("menu");
 	App.Execute.menu;

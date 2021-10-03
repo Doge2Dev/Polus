@@ -1,7 +1,11 @@
 import MakeFile;
 import AuraPackager;
-import os;
 import App;
+
+App.if (App.System().SystemType == "Windows")
+(
+import os
+);
 
 Class Struct Public Void make
 {
@@ -20,8 +24,7 @@ Class Struct Public Void make
 	MakeFile.SetExportFolder("./export");
 
 
-:Priority(
-
+:Priority
 	if (MakeFile.Folder().Exist == false)
 	{
 		os.Execute("md export");
@@ -31,7 +34,5 @@ Class Struct Public Void make
 			App.Console.WriteScreen("failed to create folder " + $(os.Exception));
 		};
 	};
-)
 :End
-
 };

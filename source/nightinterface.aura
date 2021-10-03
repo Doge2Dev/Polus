@@ -22,15 +22,15 @@ AuraEngine Class Void Start
 
 		bg.ChangeBackground();
 		AuraEngine.CreateText("Custom Night", XScreen / 2, -YScreen, "pix", "white", 23);
-		AuraEngine.UIElement().CreateElemnt("button", 128, 64, "start", UIElement("square").LeftCornerPos(x, y, "bottom"));
+		AuraEngine.UIElement().CreateElement("button", 128, 64, "start", UIElement("square").LeftCornerPos(x, y, "bottom"));
 		AuraEngine.UIElement().DrawElement("square", XScreen / 2, YScreen / 2, "top-left", false, 640, 480);
 		layer.ChangeLayer(2);
 
 		//drawing the var boxes
 
-		String[] redAI = AuraEngine.UIElement().CreateElemnt(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 32,  128, 32);
-		String[] blueAI = AuraEngine.UIElement().CreateElemnt(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 64,  128, 32);
-		String[] greenAI = AuraEngine.UIElement().CreateElemnt(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 96,  128, 32);
+		String[] redAI = AuraEngine.UIElement().CreateElement(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 32,  128, 32);
+		String[] blueAI = AuraEngine.UIElement().CreateElement(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 64,  128, 32);
+		String[] greenAI = AuraEngine.UIElement().CreateElement(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 96,  128, 32);
 
 		AuraEngine.Event(AuraEngine.UIElement is UIElement("Button").Clicked)
 		{

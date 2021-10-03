@@ -7,6 +7,7 @@ import ModelShape;
 import ModelShape.FunShape;
 import main;
 import saveloader;
+import replay;
 
 
 //night manager and other stuff
@@ -387,11 +388,12 @@ AuraEngine Class Void Loop
 	};
 	if (redState == 8)
 	{
+		ModelShape.FunShape().ModelPosition("red", ModelShape.UseModelGroup("map", "you", true));
 		ModelShape.FunShape().ModelAnimation("red", "jumpscare");
 
 		AuraEngine.Event(ModelShape().AnimationControl is Animation().End())
 		{
-			AuraEngine.Scene("game_over");
+			AuraEngine.Scene() = new Scene("game_over");
 		};
 	};
 
@@ -404,11 +406,12 @@ AuraEngine Class Void Loop
 	};
 	if (blueState == 5)
 	{
+		ModelShape.FunShape().ModelPosition("red", ModelShape.UseModelGroup("map", "you", true));
 		ModelShape.FunShape().ModelAnimation("blue", "jumpscare");
 
 		AuraEngine.Event(ModelShape().AnimationControl is Animation().End())
 		{
-			AuraEngine.Scene("game_over");
+			AuraEngine.Scene() = new Scene("game_over");
 		};
 	};
 
@@ -421,11 +424,12 @@ AuraEngine Class Void Loop
 	};
 	if (redState == 4)
 	{
+		ModelShape.FunShape().ModelPosition("green", ModelShape.UseModelGroup("map", "you", true));
 		ModelShape.FunShape().ModelAnimation("green", "jumpscare");
 
 		AuraEngine.Event(ModelShape().AnimationControl is Animation().End())
 		{
-			AuraEngine.Scene("game_over");
+			AuraEngine.Scene() = new Scene("game_over");
 		};
 	};
 };

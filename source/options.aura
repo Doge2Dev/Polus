@@ -1,0 +1,167 @@
+import app;
+import AuraEngine;
+import AuraEngine.Jsonmanager;
+import main;
+import saveloader;
+
+AuraEngine Class Void Start
+{
+
+	int section = 0;
+	int graphics = null;
+	int shadows = null;
+	int lightning = null;
+	int music = null;
+	int sfx = null;
+
+
+/*
+	====[graphics]====
+
+	0 = Ultra low
+	1 = Low
+	2 = Medium
+	3 = High
+	4 = Ultra
+
+	====[Shadows]====
+
+	0 = low
+	1 = medium
+	2 = high
+	3 = ultra
+
+	====[Light]====
+
+	0 = Low
+	1 = Medium
+	2 = High
+
+*/
+	String[] quality = null;
+	String[] shadow = null;
+	String[] light = null;
+
+	//events
+
+	AuraEngine.Event(AuraEngine.UIElement() is UIElement.Clicked("graph_btn"))
+	{
+		section = 1;
+	};
+	AuraEngine.Event(AuraEngine.UIElement() is UIElement.Clicked("audio1_btn"))
+	{
+		section = 2;
+	};
+	AuraEngine.Event(AuraEngine.UIElement() is UIElement.Clicked("miscellaneous_btn"))
+	{
+		section = 3;
+	};
+	AuraEngine.Event(AuraEngine.Input() is Input.KeyPressed("escape"))
+	{
+		section = 0;
+		AuraEngine.Scene = new Scene("menu");
+		App.Execute.main;
+	};
+
+
+	if (section == 0)
+	{
+		AuraEngine.DestroyAllText();
+		AuraEngine.CreateText("Graphics", 560, 560, "polus", 26,"graphics_btn");
+		AuraEngine.UIElement().CreateElement("Button", XLabelPos("graphics_btn"), YLabelPos("graphics_btn"), WitdhLable("graphics_btn"), HeightLabel("graphics_btn"), true, "graph_btn");
+		AuraEngine.CreateText("Audio", 560, 602, "polus", 26,"audio_btn");
+		AuraEngine.UIElement().CreateElement("Button", XLabelPos("audio_btn"), YLabelPos("audio_btn"), WitdhLable("audio_btn"), HeightLabel("audio_btn"), true, "audio1_btn");
+		AuraEngine.CreateText("Misc", 560, 626, "polus", 26,"misc_btn");
+		AuraEngine.UIElement().CreateElement("Button", XLabelPos("misc_btn"), YLabelPos("misc_btn"), WitdhLable("misc_btn"), HeightLabel("misc_btn"), true, "miscellaneous_btn");
+
+	};
+
+	if (section == 1)
+	{
+		AuraEngine.DestroyAllText();
+		AuraEngine.CreateText("Quality : " + quality, 560, 560, "polus",  26, "quality_btn");
+		AuraEngine.CreateText("Shadows : " + shadow, 560, 602, "polus",  26, "shadows_btn");
+		AuraEngine.CreateText("Lights : " + light, 560, 624, "polus",  26, "lights_btn");
+
+		//buttons
+		AuraEngine.UIElement().CreateElement("Button", XLabelPos("quality_btn"), YLabelPos("quality_btn"), WitdhLable("quality_btn"), HeightLabel("quality_btn"), true, "ql_btn");
+		AuraEngine.UIElement().CreateElement("Button", XLabelPos("shadows_btn"), YLabelPos("shadows_btn"), WitdhLable("shadows_btn"), HeightLabel("shadows_btn"), true, "sh_btn");
+		AuraEngine.UIElement().CreateElement("Button", XLabelPos("lights_btn"), YLabelPos("lights_btn"), WitdhLable("lights_btn"), HeightLabel("lights_btn"), true, "lg_btn");
+
+		switch (graphics)
+		{
+			case 0:
+				quality = "ultra low";
+			break;
+			case 1:
+				quality = "low";
+			break;
+			case 2:
+				quality = "medium";
+			break;
+			case 3:
+				quality = "high";
+			break;
+			case 4:
+				quality = "ultra";
+			break;
+		};
+		switch (shadows)
+		{
+			case 0:
+				quality = "low";
+			break;
+			case 1:
+				quality = "medium";
+			break;
+			case 2:
+				quality = "high";
+			break;
+			case 3;
+				quality = "ultra";
+			break;
+		};
+		switch (lights)
+		{
+			case 0:
+				quality = "low";
+			break;
+			case 1:
+				quality = "medium";
+			break;
+			case 2:
+				quality = "high";
+			break;
+		};
+
+		AuraEngine.Event(AuraEngine.UIElement() is UIElement.Clicked("ql_btn"))
+		{
+			graphics++;
+
+			if (graphics < 4)
+			{
+				graphics = 0;
+			};
+		};
+		AuraEngine.Event(AuraEngine.UIElement() is UIElement.Clicked("sh_btn"))
+		{
+			shadows++;
+
+			if (shadows < 3)
+			{
+				shadows = 0;
+			};
+		};
+		AuraEngine.Event(AuraEngine.UIElement() is UIElement.Clicked("lg_btn"))
+		{
+			lights++;
+
+			if (lights < 2)
+			{
+				lights = 0;
+			};
+		};
+	};
+};
+
+Package.Export;

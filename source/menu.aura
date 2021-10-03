@@ -83,11 +83,11 @@ AuraEngine Class Void Loop
 {
 	AuraEngine.Check(KeyBoard.Input());
 
-	AuraEngine.Event(KeyBoard.Input("sys.ArrowDown"))
+	AuraEngine.Event(KeyBoard.Input("sys.ArrowDown") is KeyBoard.Key().Pressed())
 	{
 		selection++;
 	};
-	AuraEngine.Event(KeyBoard.Input("sys.ArrowUp"))
+	AuraEngine.Event(KeyBoard.Input("sys.ArrowUp") is KeyBoard.Key().Pressed())
 	{
 		selection--;
 	};
