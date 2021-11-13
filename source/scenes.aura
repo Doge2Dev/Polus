@@ -1,6 +1,8 @@
 import App;
 import AuraEngine;
 import AuraEngine.Scenes;
+import AuraEngine.AECollectives.time;
+import AuraEngine.Scenes.Effects;
 import warning.txt;
 
 AuraEngine.Event(App.Application is Application.Start())
@@ -10,9 +12,8 @@ AuraEngine.Event(App.Application is Application.Start())
 	AuraEngine.Scene(CreateScene("night"));
 	AuraEngine.Scene(CreateScene("modnight"));
 	AuraEngine.Scene(CreateScene("extras"));
-	AuraEngine.Scene(CreateScene("replay"));
-	AuraEngine.Scene(CreateScene("replay_player"));
 	AuraEngine.Scene(CreateScene("warning"));
+	AuraEngine.Scene(CreateScene("end_night"));
 };
 
 //create the scene for warning
@@ -29,8 +30,9 @@ AuraEngine Class Void Start
 		AuraEngine.DestroyAllText();
 		AuraEngine.CreateText(text, XScreen / 2, YScreen / 2, "polus",  26, "ffffff", "text");
 
-		AuraEngine.Event(KeyBoard.Input(*) is KeyBoard.Key().Pressed())
+		AuraEngine.Event(KeyBoard.Input(*) is KeyBoard.Key().Pressed() || Event(AuraEngine.AECollectives.time() is Time == 4000)
 		{
+			AuraEngine.Scene.Effects().ApplyTransition("fade-in-out", 2.0, "black");
 			AuraEngine.Scene() = new Scene("menu");
 			App.Console.WriteScreen("Menu scene loaded").Trace();
 			App.Console.WriteScreen("version 1.0").Trace();

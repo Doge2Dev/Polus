@@ -1,7 +1,7 @@
 import AuraRuntime;
-import AuraRuntime.RuntimeKit;
-import AuraRuntime.RuntimeKit.PlyBase;
-import AuraRuntime.RuntimeKit.PlyBase.Jinx;
+import AuraRuntime.RuntimeToolKit;
+import AuraRuntime.RuntimeToolKit.PlyBase;
+import AuraRuntime.RuntimeToolKit.PlyBase.Jinx;
 import AuraEngine.JsonManager;
 import App;
 import AuraEngine;
@@ -12,6 +12,7 @@ import AuraLibManager;
 import AuraLibManager.Community;
 import ModelShape;
 import ModelShape.FunShape;
+import srcpreload;
 
 
 Function Define Init() //current vanilla aura function lmao =3
@@ -120,4 +121,9 @@ AuraRuntime().onEvent(state = Runtime.init)
 };
 
 AuraRuntime().Authorization("invoker");
-AuraRuntime().EnableLogs("./logs");
+AuraRuntime.EnableLogs("./logs");
+
+AuraRuntime().onEvent(state = Runtime.init)
+{
+	srcpreload.PreloadScreen;
+};

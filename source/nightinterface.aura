@@ -1,6 +1,7 @@
 import App;
 import AuraEngine;
 import AuraEngine.Blaster;
+import AuraEngine.HTMLVariety.UIElement;
 import AuraEngine.JsonManager;
 import ModelShape;
 import ModelShape.FunShape;
@@ -14,7 +15,10 @@ AuraEngine Class Void Start
 	float YScreen = AuraEngine.InfoGet(ScreenSize(Screen.Height));
 	float XScreen = AuraEngine.InfoGet(ScreenSize(Screen.Width));
 	int layer = AuraEngine.UIElement().Layer();
-	String[] bg = AuraEngine.Background(Static.Color(0, 0, 0));
+	String[] bg = AuraEngine.Background(GetTexture("./image/bgs/defaultBG.png"));
+	int redAiVal = null;
+	int blueAiVal = null;
+	int greenAiVal = null;
 
 	AuraEngine Class Public Void interface
 	{
@@ -28,17 +32,23 @@ AuraEngine Class Void Start
 
 		//drawing the var boxes
 
-		String[] redAI = AuraEngine.UIElement().CreateElement(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 32,  128, 32);
-		String[] blueAI = AuraEngine.UIElement().CreateElement(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 64,  128, 32);
-		String[] greenAI = AuraEngine.UIElement().CreateElement(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 96,  128, 32);
+		int valredAI = AuraEngine.UIElement().CreateElement(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 32,  128, 32);
+		int valblueAI = AuraEngine.UIElement().CreateElement(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 64,  128, 32);
+		int valgreenAI = AuraEngine.UIElement().CreateElement(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 96,  128, 32);
 
 		AuraEngine.Event(AuraEngine.UIElement is UIElement("Button").Clicked)
 		{
-			night.var(night.body_redAI().SetValue(redAI));
-			night.var(night.body_blueAI().SetValue(blueAI));
-			night.var(night.body_greenAI().SetValue(greenAI));
-			AuraEngine.Scene("night");
-			App.Callstack.night;
+			Class Public Static varsIndex
+			{
+				redAiVal = valredAI;
+				blueAiVal = valblueAI;
+				greenAiVal = valgreenAI;
+				AuraEngine.Scene("night");
+				App.Callstack.night;
+			};
+
 		};
 	};
 };
+
+Package.Export;

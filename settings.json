@@ -1,19 +1,21 @@
 {
 	"Project" : {
 		"project.name" : "Polus Night Shift",
-		"project.package" : "ar.dogedev.polus",
+		"project.package" : "ae.chocolateloxtl.polus",
 		"project.version" : "1.0.0",
 		"project.dependencies" : {
 			"AuraEngine" : "8.8.7",
 			"BlasterFX" : "3.1",
 			"DirectGL" : "1.3",
 			"2DGL" : "0.2.1",
+			"ModelShape" : "v15.2.4",
+			"ModelShape.FunShape" : "v15.2.1"
  		},
  		"project.Sources" : "./source",
 		"project.Settings" : {
 			"window" : {
-				"window.width" : "1980",
-				"window.height" : "1080",
+				"window.width" : "1270",
+				"window.height" : "720",
 				"window.border" : "null",
 				"window.title" : "Polus Night Shift",
 				"window.RenderOption" : {
@@ -70,8 +72,8 @@
 		"project.customField4" : {
 			"AuraEngine.init" : {
 				"Script" :	[
-					"main.aura",
-					"--scenes.aura"
+					"source/main.aura",
+					"--source/scenes.aura"
 				],
 				"Function" : [
 					"--AuraEngine.Scene() = new Scene('warning');",

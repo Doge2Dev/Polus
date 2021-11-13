@@ -4,7 +4,7 @@ import App;
 
 App.if (App.System().SystemType == "Windows")
 (
-import os
+	import os
 );
 
 Class Struct Public Void make
@@ -23,6 +23,12 @@ Class Struct Public Void make
 	MakeFile.Build().Export(AuraPackager(TypeArch = "Nexus.Server"), FileType(xnav.Image).BuildArch("32x"));
 	MakeFile.SetExportFolder("./export");
 
+	if (App.GetCommandLine.SyntaxisElement[*].hasContent == "-debug")
+	{
+		MakeFile.Build().enableDebug(true);
+		App.Console.WriteScreen("debug enabled").Trace();
+	}
+
 
 :Priority
 	if (MakeFile.Folder().Exist == false)
@@ -35,4 +41,13 @@ Class Struct Public Void make
 		};
 	};
 :End
+
+	try ()
+	{
+		
+	}
+	catch
+	{
+
+	}
 };

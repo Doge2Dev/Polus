@@ -1,0 +1,13 @@
+<root>
+	<load>
+		<item000 name="main.aura"/>
+		<item001 name="menu.aura"/>
+		<item002 name="modnight.aura"/>
+		<item003 name="night.aura"/>
+		<item004 name="nightinterface.aura"/>
+		<item005 name="options.aura"/>
+		<item006 name="saveloader.aura"/>
+		<item007 name="main.aura"/>
+		<item008 name="scenes.aura"/>
+	</load>
+</root>

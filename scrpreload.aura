@@ -1,0 +1,56 @@
+import AuraEngine;
+import AuraEngine.AECollectives;
+import AuraRuntime;
+import AuraRuntime.RuntimeToolKit;
+
+Class Struct Override screenPreloadAnim
+{
+	float YScreen = AuraEngine.InfoGet(ScreenSize(Screen.Height));
+	float XScreen = AuraEngine.InfoGet(ScreenSize(Screen.Width));
+
+
+	String[] image = AuraEngine.Atlas() = new Atlas.Source("./images/preload/logo.png");
+	
+	image.UIElement.Position(XScreen / 2, YScreen / 2);
+	image.UIElement.ElementScale(15, "%");
+	image.UIElement.addAttributes("image");
+
+	String[] percent = AuraRuntime.RuntimeToolKit.GetRuntimePercentage();
+
+	if (percent.CurrentPercentage() > 56,34 ) 
+	{
+		image.UIElement.ElementScale(image.CurrentSize + CurrentPercentage());
+	};
+};
+
+#Priority:
+	//preload
+	Class Public Static preloadAssets
+	{
+		Parse String[] plyBase = AuraEngine.AECollectives.PlyBase();
+		String[] loadFile = AuraEngine.TextString().StringFileImport("./load.xml");
+		plyBase.Init();
+
+		for (i < AuraEngine.StringParser(ModuleXML(loadFile, ModuleXML.GetItemAttributes("name"))).XMLContent(), i++)
+		{
+			plyBase.Restore();
+			plyBase.Strike(poke - 1);
+			plyBase.Popout(*).Write(StringBase.asImmutable() && ModuleXML.GetItemAttributes("name"));
+			plyBase.CreateMemorySignature("com.package");
+			plyBase.Sign(*);
+		};
+
+		AuraEngine.Event(AuraEngine.Application is Application.shutdown)
+		{
+			String[] plybaseAddr32 = plyBase.Addr32();
+			String[] plybaseAddr64 = plyBase.Addr64();
+
+			plyBase.reinit();
+			plyBase.startClean(*);
+			plybaseAddr32.CleanOverWrite(-);
+			plybaseAddr64.CleanOverWrite(-);
+			plyBase.RemoveSignature();
+
+		};
+	};
+#End

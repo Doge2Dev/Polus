@@ -7,7 +7,7 @@ import ModelShape;
 import ModelShape.FunShape;
 import main;
 import saveloader;
-import replay;
+import nightinterface;
 
 
 //night manager and other stuff
@@ -17,6 +17,7 @@ AuraEngine Class Void Start
 	float YScreen = AuraEngine.InfoGet(ScreenSize(Screen.Height));
 	float XScreen = AuraEngine.InfoGet(ScreenSize(Screen.Width));
 	int state = 0;
+	int start = 1;
 	String[] text = AuraEngine.CreateText("Night" + saveloader.nightID);
 	float currentSize = text.GetTextSize(false);
 	float currentOpacity = text.GetRGB(AuraEngine.Text().ColorChannel(Alpha));
@@ -24,7 +25,7 @@ AuraEngine Class Void Start
 
 	AuraEngine Function loadTextures()
 	{
-		//load textures
+		//load textures & models
 		String[] map = ModelShape(ImportObject("./source/maps/map.mdf"), true);
 		String[] model_body_red = ModelShape(ImportObject("./source/chr/red.mdf"), true);
 		String[] model_body_blue = ModelShape(ImportObject("./source/chr/blue.mdf"), true);
@@ -46,6 +47,46 @@ AuraEngine Class Void Start
 	Parse toGlobal {int body_redAI = 0};
 	Parse toGlobal {int body_blueAI = 0};
 	Parse toGlobal {int body_greenAI = 0};
+
+	int MOUSEX = AuraEngine.GetCursorPos(x);
+	int MOUSEY = AuraEngine.GetCursorPos(y);
+
+	AuraEngine.List("click")
+
+	AuraEngine.Event(AuraEngine.GetMouse)
+
+	//this is for replay
+	/*
+	AuraEngine.ObjectNode(CreateObject("sprite"), true);
+	AuraEngine.AlwaysEvent()
+	{
+		AuraEngine.ObjectNode(ObjectPos(MOUSEX, MOUSEY));
+	};
+
+	//replay timeline function (timeline disable for this commit)
+	
+	AuraEngine Class Static Void timeline
+	{
+		int miliseconds = 0;
+		int seconds = 0;
+		int minutes = 0;
+		int hours = 0;
+
+		AuraEngine.FireEvent("mili", App.Timer.sleep(0.01));
+
+		AuraEngine.Event(AuraEngine.FireEvent() is Event().EventName("mili").Fired)
+		{
+			miliseconds++;
+		};
+
+	};
+	*/
+};
+
+AuraEngine Class Void Loop
+{
+	if (loadState == 1)
+	{
 
 	//map
 	ModelShape.FunShape().Camera(DefaultCameraPos(ModelShape.UseModelGroup("map", "you")));
@@ -108,6 +149,11 @@ AuraEngine Class Void Loop
 				body_redAI = 20;
 				body_blueAI = 20;
 				body_greenAI = 10;		
+			break;
+			case "modnight":
+				body_redAI = varsIndex.redAiVal;
+				body_blueAI = varsIndex.blueAiVal;;
+				body_greenAI = varsIndex.greenAiVal;;
 			break;
 			default:
 				body_redAI = 0;
@@ -432,6 +478,23 @@ AuraEngine Class Void Loop
 			AuraEngine.Scene() = new Scene("game_over");
 		};
 	};
-};
 
+	//clock
+
+	AuraEngine.UIElement().DrawElement(Element.Text(clock + "am"));
+
+	while (start == 1)
+	{
+		AuraEngine.UIElement().EditElement(Element.Text, clock + "am");
+		App.Timer.sleep(45);
+		clock++;
+
+		if (start == 1 && clock < 5)
+		{
+			App.Console.WriteScreen("Night ended").Trace();
+			AuraEngine.Scene = new Scene("end_night");
+		};
+	};
+	}
+}
 Package.Export;

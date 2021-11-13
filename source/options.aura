@@ -1,6 +1,10 @@
 import app;
 import AuraEngine;
 import AuraEngine.Jsonmanager;
+import ModelShape;
+import ModelShape.FunShape;
+import ModelShape.FunShape.lightNav;
+import Gloob;
 import main;
 import saveloader;
 
@@ -138,6 +142,42 @@ AuraEngine Class Void Start
 		{
 			graphics++;
 
+			if (graphics == 0)
+			{
+				App.Console.WriteScreen("Quality : " + quality);
+				ModelShape().FunShape().TextureBank(SetTexture(Resolution.Texture(128, 256)));
+				Gloob.PolyInterfer().ChangePolygons(265, 192, 200, true);
+				Gloob.SaveModel().asModel("temp_models");
+			};
+			else if (graphics == 1)
+			{
+				App.Console.WriteScreen("Quality : " + quality);
+				ModelShape().FunShape().TextureBank(SetTexture(Resolution.Texture(256, 480)));
+				Gloob.PolyInterfer().ChangePolygons(165, 154, 132, true);
+				Gloob.SaveModel().asModel("temp_models");
+			};
+			else if (graphics == 2)
+			{
+				App.Console.WriteScreen("Quality : " + quality);
+				ModelShape().FunShape().TextureBank(SetTexture(Resolution.Texture(640, 480)));
+				Gloob.PolyInterfer().ChangePolygons(329, 230, 332, true);
+				Gloob.SaveModel().asModel("temp_models");
+			};
+			else if (graphics == 3)
+			{
+				App.Console.WriteScreen("Quality : " + quality);
+				ModelShape().FunShape().TextureBank(SetTexture(Resolution.Texture(1980, 1080)));
+				Gloob.PolyInterfer().ChangePolygons(665, 554, 132, true);
+				Gloob.SaveModel().asModel("temp_models");
+			};
+			else if (graphics == 4)
+			{
+				App.Console.WriteScreen("Quality : " + quality);
+				ModelShape().FunShape().TextureBank(SetTexture(Resolution.Texture(2180, 1980)));
+				Gloob.PolyInterfer().ChangePolygons(0, 0, 0, true);
+				Gloob.SaveModel().asModel("temp_models");
+			};
+
 			if (graphics < 4)
 			{
 				graphics = 0;
@@ -151,6 +191,9 @@ AuraEngine Class Void Start
 			{
 				shadows = 0;
 			};
+
+			
+			
 		};
 		AuraEngine.Event(AuraEngine.UIElement() is UIElement.Clicked("lg_btn"))
 		{
@@ -161,6 +204,11 @@ AuraEngine Class Void Start
 				lights = 0;
 			};
 		};
+	};
+
+	if (section == 2)
+	{
+		AuraEngine.DestroyAllText();
 	};
 };
 

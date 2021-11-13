@@ -71,7 +71,7 @@ AuraEngine Class Static Structure saveoptions
 		String[] extension = ".dbsys";
 		String[] version = "1.0";
 
-		:Priority #1
+		:Priority //1
 		App.File.CreateFile("optsave" + extension, true);
 		:End
 
@@ -89,6 +89,14 @@ AuraEngine Class Static Structure saveoptions
 
 	AuraEngine Class Void Public opload
 	{
+		AuraEngine.File().LoadFile("optsave.dbsys");
+		App.File.Crypto(UncryptFile("optsave.dbsys", file.Content("hash").Hash32x().AssemblyLoad()));
+			
+		g = AuraEngine.File().Parse(File.Content("g").ParseContent());
+		s = AuraEngine.File().Parse(File.Content("s").ParseContent());	
+		l = AuraEngine.File().Parse(File.Content("l").ParseContent());
+		m = AuraEngine.File().Parse(File.Content("m").ParseContent());
+		sf = AuraEngine.File().Parse(File.Content("sf").ParseContent());
 
 	};
 };
