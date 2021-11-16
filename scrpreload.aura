@@ -3,7 +3,7 @@ import AuraEngine.AECollectives;
 import AuraRuntime;
 import AuraRuntime.RuntimeToolKit;
 
-Class Struct Override screenPreloadAnim
+Class Struct Override::Priority screenPreloadAnim
 {
 	float YScreen = AuraEngine.InfoGet(ScreenSize(Screen.Height));
 	float XScreen = AuraEngine.InfoGet(ScreenSize(Screen.Width));
@@ -15,7 +15,7 @@ Class Struct Override screenPreloadAnim
 	image.UIElement.ElementScale(15, "%");
 	image.UIElement.addAttributes("image");
 
-	String[] percent = AuraRuntime.RuntimeToolKit.GetRuntimePercentage();
+	int percent = AuraRuntime.RuntimeToolKit.GetRuntimePercentage();
 
 	if (percent.CurrentPercentage() > 56,34 ) 
 	{
@@ -24,33 +24,36 @@ Class Struct Override screenPreloadAnim
 };
 
 #Priority:
-	//preload
+	//preload (use plyBase Memory Strikes to write all the script content)
 	Class Public Static preloadAssets
 	{
 		Parse String[] plyBase = AuraEngine.AECollectives.PlyBase();
 		String[] loadFile = AuraEngine.TextString().StringFileImport("./load.xml");
+		String[] nameXML = "item";
 		plyBase.Init();
 
-		for (i < AuraEngine.StringParser(ModuleXML(loadFile, ModuleXML.GetItemAttributes("name"))).XMLContent(), i++)
+		for (i < AuraEngine.StringParser(ModuleXML(loadFile, ModuleXML.ItemName(nameXML),ModuleXML.GetItemAttributes("name"))).XMLContent(), i++)
 		{
 			plyBase.Restore();
-			plyBase.Strike(poke - 1);
+			plyBase.Strike(* + plyBase.MemAddr =+ ModuleXML.GetItemAttributes("name").ScriptContent());
 			plyBase.Popout(*).Write(StringBase.asImmutable() && ModuleXML.GetItemAttributes("name"));
 			plyBase.CreateMemorySignature("com.package");
 			plyBase.Sign(*);
 		};
 
-		AuraEngine.Event(AuraEngine.Application is Application.shutdown)
+
+		//event when app shutdown clear all the memory content
+		AuraEngine.Event(AuraEngine.Application is Application.Shutdown())
 		{
 			String[] plybaseAddr32 = plyBase.Addr32();
 			String[] plybaseAddr64 = plyBase.Addr64();
 
-			plyBase.reinit();
-			plyBase.startClean(*);
-			plybaseAddr32.CleanOverWrite(-);
-			plybaseAddr64.CleanOverWrite(-);
+			plyBase.ReInit();
+			plyBase.StartClean(*);
+			plybaseAddr32.CleanOverwrite(-);
+			plybaseAddr64.CleanOverwrite(-);
 			plyBase.RemoveSignature();
-
+			plyBase.Shutdown();
 		};
 	};
 #End

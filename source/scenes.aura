@@ -22,15 +22,21 @@ AuraEngine Class Void Start
 	String[] text = App.File.Read("warning.txt", File.Split(Use = "/n")); 	//read it file
 	float YScreen = AuraEngine.InfoGet(ScreenSize(Screen.Height));
 	float XScreen = AuraEngine.InfoGet(ScreenSize(Screen.Width));
+	String[] bgcolor = AuraEngine.Background.StaticColor();
+
+	//debug
+	text.addEventListener(App.File.Loaded, function(){
+		App.Console.WriteScreen("file loaded.").Trace();
+	});
 
 	AuraEngine.Event(AuraEngine.Scene() is Scene("warning").Loaded())
 	{
-		AuraEngine.Background().ChangeBackground("Static.Color", 0, 0, 0, true);
+		AuraEngine.Background().ChangeBackground("bgcolor", 0, 0, 0, true);
 
 		AuraEngine.DestroyAllText();
 		AuraEngine.CreateText(text, XScreen / 2, YScreen / 2, "polus",  26, "ffffff", "text");
 
-		AuraEngine.Event(KeyBoard.Input(*) is KeyBoard.Key().Pressed() || Event(AuraEngine.AECollectives.time() is Time == 4000)
+		AuraEngine.Event(KeyBoard.Input(*) is KeyBoard.Key().Pressed() || Event(AuraEngine.AECollectives.time() is Time(10000))
 		{
 			AuraEngine.Scene.Effects().ApplyTransition("fade-in-out", 2.0, "black");
 			AuraEngine.Scene() = new Scene("menu");

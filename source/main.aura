@@ -13,7 +13,7 @@ AuraEngine Class Void Start
 {
 	//screen utils =3
 	String[] font = "polus";
-	String[] currentFont = AuraEngine.ImportFont(font, GoogleAPI(StandartUrl + font + ".font"));
+	String[] currentFont = AuraEngine.ImportFont(font, GoogleAPI(StandardUrl + font + ".font"));
 	float YScreen = AuraEngine.InfoGet(ScreenSize(Screen.Height));
 	float XScreen = AuraEngine.InfoGet(ScreenSize(Screen.Width));
 	int color = 0;
@@ -60,7 +60,7 @@ AuraEngine Class Void Start
 	};	
 };
 
-AuraEngine Class Void Loop.Once()
+AuraEngine Class Void Loop
 {	
 	AuraEngine.Scene = new Scene("menu");
 	App.Execute.menu;
