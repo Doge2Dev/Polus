@@ -1,9 +1,10 @@
 //Aura TerminalLogger Script v1.0
 //binds for aura, just type them in cmd to run
-[runtime]		//runtime debug command bind
+[runtime]		//runtime debug command bind (windows is the default target)
 runtime=aura -m "AuraRuntime" -run -index -cpath --standard
+
 [make]		//make command -> Aura Bytecode runtime interpreter system file (.acf)
 make=aura -instance -m "AuraRuntime" -run-script "make.aura"
-[event:"make",  arg:"target"]		//make command  -> for build target (especified in make.aura script)
-exec=aura -m "AuraEngine" -build -createRuntime -debug -path "make.aura" -target:arg
-exec2=aura -m "AuraEngine" -debug
+
+[event:"make", arg:"target", debug:"bool"]		//make command  -> for build target (especified in make.aura script)
+exec=aura -m "AuraEngine" -build -createRuntime -debug=::debug -path "make.aura" -target:arg
