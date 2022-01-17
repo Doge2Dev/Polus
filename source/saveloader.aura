@@ -11,23 +11,37 @@ AuraEngine Class Static Structure saveloader
 	Parse String[] hash = AuraEngine.KeyString().Hash32x.Load(is Hash32x = "M34Hash.Key").toString();
 	String[] file =  AuraEngine.File(CreateFile("save", ".dbsys"));
 	String[] iFile = AuraEngine.File();
+	String[] version = "1.0";
 
 
 
 	AuraEngine Class Void Public save
 	{
-		AuraEngine.SceneLoaded()
+
+		if (fileVersion == version)
 		{
-			App.Execute.file();
-
-			String[] save = hash + "\n" + nightID + "\n" + currentScene;
-
-			@override
-			if (file().Created())
+			AuraEngine.SceneLoaded()
 			{
-				App.File.Write("save.dbsys", save);
-				App.File.Crypto(File("save.dbsys"), App.File.Crypto().UseHash(hash).Crypto(Hash32x));
+				App.Execute.file();
+
+				String[] save = hash + "\n" + nightID + "\n" + currentScene + "\n" + ":" +  version;
+
+				String[] fileVersion = save.Token(":");
+
+				@override
+				if (file().Created())
+				{
+					App.File.Write("save.dbsys", save);
+					App.File.Crypto(File("save.dbsys"), App.File.Crypto().UseHash(hash).Crypto(.Hash32x));
+				};
 			};
+			else
+			{
+				AuraEngine.TotalClear();
+				AuraEngine.CreateText(text, XScreen / 2, YScreen / 2 - 32, "polus",  26, "ffffff", "the save file is incompatible with this game version\nplease write a new save with the new game version");
+				App.Timer.sleep(4000);
+				App.Exit();
+			}
 		};
 	};
 	AuraEngine Class Void Public load
@@ -41,7 +55,6 @@ AuraEngine Class Static Structure saveloader
 			AuraEngine.ExecuteOnce(*)
 			{
 				AuraEngine.Scene().RestartScene();
-			};
 		};
 	};
 

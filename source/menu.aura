@@ -108,7 +108,6 @@ AuraEngine Class Void Loop
 	};
 	if (AuraEngine.KeyBoard.Input() == "sys.Universal.Enter") && (selection == 1)
 	{
-		AuraEngine.Scene() = new Scene("nightEngine");
 		saveloader.Load() => (nightID);
 
 		if (saveloader.nightID == 1)

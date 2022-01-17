@@ -1,5 +1,5 @@
 <root>
-	<load>
+	<loadScripts>
 		<item000 name="main.aura"/>
 		<item001 name="menu.aura"/>
 		<item002 name="modnight.aura"/>
@@ -9,5 +9,5 @@
 		<item006 name="saveloader.aura"/>
 		<item007 name="main.aura"/>
 		<item008 name="scenes.aura"/>
-	</load>
+	</loadScripts>
 </root>

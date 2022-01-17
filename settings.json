@@ -24,7 +24,8 @@
 						"appType.Mac" : "2DGL.OpenNexus",
 						"appType.Linux" : "2DGL.DirectGLSupport",
 						"appType.NexusSystem" : "Direct.2DGLSupport",
-						"appType.NexusServer" : "2DGL.OpenGL2D"
+						"appType.NexusServer" : "2DGL.OpenGL2D",
+						"appType.webHTML" : "WebGL"
 					}
 				}
 			},

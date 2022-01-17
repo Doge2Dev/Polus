@@ -1,4 +1,5 @@
 import App;
+import web;
 import menu;
 import Package;
 import AuraEngine;
@@ -35,6 +36,7 @@ AuraEngine Class Void Start
 		while (sceneState == 1)
 		{
 			color++;
+			AuraEngine.Sound.playSound("snd_gameover.ogg", 1, 1, 100);
 			AuraEngine.Text("gameover_text", TextColor(color, 0, 0));
 			BlasterFX.CreateFX(): AuraEngine.Scene().Background(BlasterFX.FXCommunity(BlasterGet("wall_blood_fx.json"), true, 1));
 			BlasterFX.FXColor(CurrentExecutedFX(fxcolor, 0, 0));

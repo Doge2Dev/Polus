@@ -13,6 +13,9 @@ import AuraLibManager.Community;
 import ModelShape;
 import ModelShape.FunShape;
 import srcpreload;
+import AuraEngine.webNative;
+import AuraRuntime.webNativeTools;
+import AuraRuntime.RuntimeToolKit.webRuntime;
 
 
 Function Define Init() //current vanilla aura function lmao =3
@@ -44,7 +47,8 @@ AuraEngine.RenderOptions()
 {
 	String[] systemType = AuraEngine.GetSystemArch();
 
-	switch(systemType = type()) {
+	switch (systemType = type()) 
+	{
 		case type.Windows:
 			AuraEngine.RenderEngine(UseExternal("./settings.json"), "DirectGL.DirectXRender.dll");
 		break;
@@ -62,6 +66,10 @@ AuraEngine.RenderOptions()
 
 		case type.Nexus.Server:
 			AuraEngine.RenderEngine(UseExternal("./settings.json"), "2DGL.OpenGL2D.dll");		
+		break;
+		case type.Web:
+			AuraEngine.RenderEngine(UseExternal("./seetings.json"), "WebGL.dll");
+			AuraEngine.RenderEngine.Dependencies("WebGL") = new AuraEngine.Modules("AuraEngine.WebNative");
 		break;
 	};
 };

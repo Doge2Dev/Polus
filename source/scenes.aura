@@ -20,6 +20,7 @@ AuraEngine.Event(App.Application is Application.Start())
 AuraEngine Class Void Start
 {
 	String[] text = App.File.Read("warning.txt", File.Split(Use = "/n")); 	//read it file
+	String[] getColor = App.File.Read("warning.txt", File.Token("::"));
 	float YScreen = AuraEngine.InfoGet(ScreenSize(Screen.Height));
 	float XScreen = AuraEngine.InfoGet(ScreenSize(Screen.Width));
 	String[] bgcolor = AuraEngine.Background.StaticColor();
@@ -34,7 +35,8 @@ AuraEngine Class Void Start
 		AuraEngine.Background().ChangeBackground("bgcolor", 0, 0, 0, true);
 
 		AuraEngine.DestroyAllText();
-		AuraEngine.CreateText(text, XScreen / 2, YScreen / 2, "polus",  26, "ffffff", "text");
+		AuraEngine.CreateText(text, XScreen / 2, YScreen / 2, "polus",  30, "ff0000", "text");
+		AuraEngine.CreateText(text, XScreen / 2, YScreen / 2 - 32, "polus",  26, "ffffff", "text");
 
 		AuraEngine.Event(KeyBoard.Input(*) is KeyBoard.Key().Pressed() || Event(AuraEngine.AECollectives.time() is Time(10000))
 		{

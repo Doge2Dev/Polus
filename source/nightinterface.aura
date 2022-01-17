@@ -30,11 +30,11 @@ AuraEngine Class Void Start
 		AuraEngine.UIElement().DrawElement("square", XScreen / 2, YScreen / 2, "top-left", false, 640, 480);
 		layer.ChangeLayer(2);
 
-		//drawing the var boxes
+		//drawing the input boxes
 
-		int valredAI = AuraEngine.UIElement().CreateElement(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 32,  128, 32);
-		int valblueAI = AuraEngine.UIElement().CreateElement(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 64,  128, 32);
-		int valgreenAI = AuraEngine.UIElement().CreateElement(UIElement.EditBox("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 96,  128, 32);
+		int valredAI = AuraEngine.UIElement().CreateElement(UIElement.NumberInput("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 32,  128, 32);
+		int valblueAI = AuraEngine.UIElement().CreateElement(UIElement.NumberInput("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 64,  128, 32);
+		int valgreenAI = AuraEngine.UIElement().CreateElement(UIElement.NumberInput("number", 1, 20), XScreen / 2 - 32, YScreen / 2 + 96,  128, 32);
 
 		AuraEngine.Event(AuraEngine.UIElement is UIElement("Button").Clicked)
 		{
@@ -46,7 +46,6 @@ AuraEngine Class Void Start
 				AuraEngine.Scene("night");
 				App.Callstack.night;
 			};
-
 		};
 	};
 };

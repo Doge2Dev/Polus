@@ -1,5 +1,6 @@
 import MakeFile;
 import AuraPackager;
+import MakeFile.webNative;
 import App;
 
 App.if (App.System().SystemType == "Windows")
@@ -16,11 +17,13 @@ Class Struct Public Void make
 
 	MakeFile.Build().Use(AuraPackager());
 	MakeFile.Build().ConvertBuild("Polus Night Shift").Using(AuraPackager());
-	MakeFile.Build().Export(AuraPackager(Windows.Executable()));
+	MakeFile.Build().Export(AuraPackager(Windows.Native()));
 	MakeFile.Build().Export(AuraPackager(MacOS.DMGImage(XCode.Export())));
 	MakeFile.Build().Export(AuraPackager(Linux.AppImage(File.Export)));
 	MakeFile.Build().Export(AuraPackager(TypeArch = "Nexus.System"), FileType(xnav.Image));
 	MakeFile.Build().Export(AuraPackager(TypeArch = "Nexus.Server"), FileType(xnav.Image).BuildArch("32x"));
+	MakeFile.Build().Export(webNative.WebBuild(WebGL.HTMLTools));
+	MakeFile.webNative.ExportServer = false;
 	MakeFile.SetExportFolder("./export");
 
 	if (App.GetCommandLine.SyntaxisElement[*].hasContent == "-debug")

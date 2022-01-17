@@ -14,11 +14,6 @@ AuraEngine Class Void Start
 {
 	AuraEngine.Scene() = new Scene("modnight");
 	nightinterface.interface();
-
-	App.Event().LibraryEvent(AuraEngine.Exception())
-	{
-		App.Screen.WriteText($'AuraEngine.Exception()') && App.Console.WriteScreen($'AuraEngine.Exception()').Trace();
-	};
 };
 
 Package.Export;

@@ -17,6 +17,7 @@ AuraEngine Class Void Start
 	int lightning = null;
 	int music = null;
 	int sfx = null;
+	Bool antialiasing = true;
 
 
 /*
@@ -88,9 +89,10 @@ AuraEngine Class Void Start
 		AuraEngine.CreateText("Lights : " + light, 560, 624, "polus",  26, "lights_btn");
 
 		//buttons
-		AuraEngine.UIElement().CreateElement("Button", XLabelPos("quality_btn"), YLabelPos("quality_btn"), WitdhLable("quality_btn"), HeightLabel("quality_btn"), true, "ql_btn");
-		AuraEngine.UIElement().CreateElement("Button", XLabelPos("shadows_btn"), YLabelPos("shadows_btn"), WitdhLable("shadows_btn"), HeightLabel("shadows_btn"), true, "sh_btn");
-		AuraEngine.UIElement().CreateElement("Button", XLabelPos("lights_btn"), YLabelPos("lights_btn"), WitdhLable("lights_btn"), HeightLabel("lights_btn"), true, "lg_btn");
+		AuraEngine.UIElement().CreateElement("Button", XLabelPos("quality_btn"), YLabelPos("quality_btn"), WitdhLabel("quality_btn"), HeightLabel("quality_btn"), true, "ql_btn");
+		AuraEngine.UIElement().CreateElement("Button", XLabelPos("shadows_btn"), YLabelPos("shadows_btn"), WitdhLabel("shadows_btn"), HeightLabel("shadows_btn"), true, "sh_btn");
+		AuraEngine.UIElement().CreateElement("Button", XLabelPos("lights_btn"), YLabelPos("lights_btn"), WitdhLabel("lights_btn"), HeightLabel("lights_btn"), true, "lg_btn");
+		AuraEngine.UIElement().CreateElement("Button", XLabelPos("lights_btn"), YLabelPos("lights_btn"), WitdhLabel("lights_btn"), HeightLabel("lights_btn"), true, "antiali_btn");
 
 		switch (graphics)
 		{
@@ -192,8 +194,6 @@ AuraEngine Class Void Start
 				shadows = 0;
 			};
 
-			
-			
 		};
 		AuraEngine.Event(AuraEngine.UIElement() is UIElement.Clicked("lg_btn"))
 		{
