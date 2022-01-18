@@ -204,6 +204,18 @@ AuraEngine Class Void Start
 				lights = 0;
 			};
 		};
+		AuraEngine.Event(AuraEngine.UIElement() is UIElement.Clicked("antiali_btn"))
+		{
+			switch(antialiasing)
+			{
+				case true:
+					ModelShape.FunShape.AntialiasingControl(true);
+				break;
+				case false:
+					ModelShape.FunShape.AntialiasingControl(false);
+				break;
+			};
+		};
 	};
 
 	if (section == 2)

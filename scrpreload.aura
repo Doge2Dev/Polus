@@ -21,6 +21,7 @@ Class Struct Override::Priority screenPreloadAnim
 	{
 		image.UIElement.ElementScale(image.CurrentSize + CurrentPercentage());
 	};
+	AuraEngine.ApplicationSettings().ObjectDefaultFocus("center");
 };
 
 #Priority:
