@@ -1,22 +1,6 @@
-import App;
 import AuraEngine;
-import AuraEngine.Scenes;
-import AuraEngine.AECollectives.time;
-import AuraEngine.Scenes.Effects;
-import warning.txt;
-
-
-//create scenes, i stole this from aura engine example XD
-AuraEngine.Event(App.Application is Application.Start())
-{
-	AuraEngine.Scene(CreateScene("menu"));
-	AuraEngine.Scene(CreateScene("options"));
-	AuraEngine.Scene(CreateScene("night"));
-	AuraEngine.Scene(CreateScene("modnight"));
-	AuraEngine.Scene(CreateScene("extras"));
-	AuraEngine.Scene(CreateScene("warning"));
-	AuraEngine.Scene(CreateScene("end_night"));
-};
+import AuraEngine.Community;
+import AuraEngine.AECollectives;
 
 //create the scene for warning
 AuraEngine Class Void Start
@@ -28,7 +12,7 @@ AuraEngine Class Void Start
 	String[] bgcolor = AuraEngine.Background.StaticColor();
 
 	//debug
-	text.addEventListener(App.File.Loaded, function(){
+	text.addEventListener(App.File.Loaded, () => {
 		App.Console.WriteScreen("file loaded.").Trace();
 	});
 

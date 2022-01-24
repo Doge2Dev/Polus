@@ -135,3 +135,5 @@ AuraRuntime().onEvent(state = Runtime.init)
 {
 	srcpreload.PreloadScreen;
 };
+
+AuraRuntime.AuraEngine.StartScene = "warning";

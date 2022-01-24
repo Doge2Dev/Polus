@@ -48,12 +48,12 @@ AuraEngine Class Void Start
 	Parse toGlobal {int body_blueAI = 0};
 	Parse toGlobal {int body_greenAI = 0};
 
-	int MOUSEX = AuraEngine.GetCursorPos(x);
-	int MOUSEY = AuraEngine.GetCursorPos(y);
+	//int MOUSEX = AuraEngine.GetCursorPos(x);
+	//int MOUSEY = AuraEngine.GetCursorPos(y);
 
-	AuraEngine.List("click")
+	//AuraEngine.List("click")
 
-	AuraEngine.Event(AuraEngine.GetMouse)
+	//AuraEngine.Event(AuraEngine.GetMouse)
 
 	//this is for replay
 	/*
@@ -83,7 +83,7 @@ AuraEngine Class Void Start
 	*/
 };
 
-AuraEngine Class Void Loop
+AuraEngine Class Void Loop:before
 {
 	if (loadState == 1)
 	{
@@ -375,7 +375,7 @@ AuraEngine Class Void Loop
 		ModelShape.Light().CreateLightSource(ModelShape.CoordinatesXYZ(ModelShape.UseNode("camera")), coordZ: 289,true, 0, 0, -180);
 		flashActive++;
 
-		if (flashActive > 10)
+		if (flashActive > 20)
 		{
 			ModelShape.Light().DestroyLight();
 			flashActive = 0;
